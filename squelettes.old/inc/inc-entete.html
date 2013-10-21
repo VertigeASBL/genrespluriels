@@ -1,0 +1,106 @@
+<!-- inc/entete.html est appele sur toutes les pages principales -->
+
+<!-- appel bordure ombrag�e sup�rieure -->
+<div id="ombretop"></div>
+
+<!-- appel accesskey -->      
+	<BOUCLE_Afficher_accesskey(MOTS){titre=afficher accesskey}>
+	    <INCLURE{fond=inc/inc-accesskey}{lang}>
+	</BOUCLE_Afficher_accesskey>
+
+<div id="conteneur"> <!-- ce div se ferme sur les pages principales --> 
+	
+		<div id="entete">
+		
+			<h1 class="invisible">#NOM_SITE_SPIP</h1>
+			<div id="entete-logo">
+				[<a rel="start" href="#URL_SITE_SPIP/?lang=#LANG" title="[(#NOM_SITE_SPIP|textebrut)]">
+					(#LOGO_SITE_SPIP)
+				</a>]
+			</div>  <!-- fin div entete-logo -->
+			<BOUCLE_bandeau(MOTS){titre=afficher infos bandeau}>
+				<div id="entete-texte">
+					[(#TEXTE|sinon{#NOM_SITE_SPIP})]
+				</div> <!-- fin div entete-texte -->
+				<div id="entete-descriptif">[(#DESCRIPTIF_SITE_SPIP|PtoBR)]</div>
+				<div id="entete-logo-mot">[(#LOGO_MOT|right)]</div>  
+			</BOUCLE_bandeau>
+
+			<INCLURE{fond=inc/inc-lang}{env}/>
+
+		</div> <!-- fin div entete -->
+		
+		[(#REM) Menu horizontal ]
+		<div id="topnav">
+
+			<!-- DEBUT BOUCLE_Afficher_topnav_rubriques-->
+			<BOUCLE_Afficher_topnav_rubriques(RUBRIQUES){titre_mot=afficher topnav}{lang}{doublons}{par num titre}>
+				 <ul>
+				 <li><a href="#URL_RUBRIQUE" target="_self" title="[(#DESCRIPTIF|textebrut|entites_html)]">
+					  [(#TITRE|supprimer_numero|ucfirst)]
+				 </a></li>
+				 </ul>
+			</BOUCLE_Afficher_topnav_rubriques>
+			<!-- FIN BOUCLE_Afficher_topnav_rubriques-->	  
+
+
+			<!-- DEBUT BOUCLE_Afficher_topnav_articles-->
+			<BOUCLE_Afficher_topnav_articles(ARTICLES){titre_mot=afficher topnav}{lang}{doublons}{par num titre}>
+				<ul>
+				<li><a href="#URL_ARTICLE" target="_self" title="[(#DESCRIPTIF|textebrut|entites_html)]">
+						[(#TITRE|supprimer_numero|ucfirst)]
+					</a></li>
+				</ul>
+			</BOUCLE_Afficher_topnav_articles>
+			<!-- FIN BOUCLE_Afficher_topnav_articles-->			  	
+
+			[(#PLUGIN{agenda}|oui)
+				<ul>
+					<li><a href="[(#URL_PAGE{evenements}|parametre_url{'lang',#LANG}|parametre_url{'date_debut',#ENV{date}|affdate{Y-m-d}})]" target="_self" title="<:egt:tous_nos_rdv:>">
+						<:agenda:agenda|ucfirst:>
+					</a></li>
+				</ul>
+			]
+				
+			[(#PLUGIN{spiplistes}|oui)
+				<ul>
+					<li><a href="[(#URL_PAGE{gerer_abonnement}|parametre_url{'lang',#LANG})]" target="_self" title="<:spiplistes:lettre_info:>">
+<:spiplistes:abonner|ucfirst:>
+					</a></li>
+				</ul>
+			]	
+
+				<ul>
+					<li><a href="[(#URL_PAGE{backend}|parametre_url{'lang',#LANG})]" title="<:syndiquer_site:>"><img src="[(#CHEMIN{images/feed.png})]" alt="<:icone_suivi_activite:>" />&nbsp;RSS</a></li>
+				</ul>
+			
+		<?php
+			if (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') or ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')) {
+		?>
+			[(#PLUGIN{spiplistes}|non)
+				<ul>
+					<li><a href="[(#URL_PAGE{inscription}|parametre_url{'lang',#LANG})]" target="_self" title="<:spip:pass_vousinscrire:>">
+	<:spip:login_sinscrire|ucfirst:>
+					</a></li>
+				</ul>
+			]
+		<?php
+			}
+		?>	
+			
+		</div>	 <!-- fin div topnav -->
+
+				
+		<div id="trouver">
+			[(#REM) Texte agrandi ou diminu� ]
+			[(#PLUGIN{boutonstexte}|oui) 
+				<img src="#CHEMIN{images/fontsizeup.png}" alt="fontsizeup" class="textsizeup" />
+				<img src="#CHEMIN{images/fontsizedown.png}" alt="fontsizedown" class="textsizedown" />
+			]
+			&nbsp;  <!--on affiche un espace pour pouvoir afficher la couleur du fond de la bande trouver --> 
+			[(#REM) Formulaire de recherche ]
+			<!-- accessibilite -->		
+			<a name="rechercher"></a>
+			[(#FORMULAIRE_RECHERCHE)]	
+			
+		</div> <!-- fin div trouver -->

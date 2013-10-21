@@ -1,0 +1,102 @@
+<!-- squelette egt v0.6 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+<!-- squelette pr�sentant les �v�nements -->
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{lang} {titreheader=<:agenda:agenda:>}>
+</head>
+
+<body class="page_evenements">
+
+<div id="page">  
+ 
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-entete}{lang}>          
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<div id="navigation">
+		<a href="#URL_SITE_SPIP/?lang=#LANG"><:accueil_site:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/>
+		<:agenda:agenda:> <:agenda:evenements:>
+	</div><!-- fin de haut -->    
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}{lang}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+
+    <div id="droite"> 
+
+		[(#REM) <!-- affichage du mini calendrier  --> ]
+		#CALENDRIER_MINI{#ENV{date},'date',#SELF} 
+
+		[(#REM) <!-- affichage des 2 prochains �v�nements  --> ]
+		[(#PLUGIN{Agenda}|oui) <INCLURE{fond=inc/inc-agenda}{lang}>] 
+		
+	</div><!-- fin du div droite -->
+	
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]    
+    <div id="centre-rubrique">	
+		<!-- accessibilite -->
+		<div id="noprint">
+			<a name="contenu"></a>
+		</div> 	
+
+	[(#REM) <!-- ============================ RUBRIQUES AGENDA  ================================ --> ]   
+	
+		#SET{self,#SELF|parametre_url{debut_rubriques,#EVAL{_request('debut_rubriques')}}}
+		<B_rubriques>
+			<div class="engras"><:agenda:rubriques:></div>
+			[(#REM) navigation par rubriques agenda]
+			[<p class='pagination'>(#PAGINATION{page})</p>]
+			<ul class='liste_items'>
+				<li class='item[ (#ENV{id_rubrique}|non)on]'>[(#GET{self}|parametre_url{id_rubrique,''}|aoustrong{<:agenda:toutes_rubriques:>,#ENV{id_rubrique,0}|=={0}})]</li>
+				<BOUCLE_rubriques(RUBRIQUES){par titre}{pagination 10}{agenda=1}>
+				<li class='item[ (#EXPOSE)]'>[(#GET{self}|parametre_url{id_rubrique,#ID_RUBRIQUE}|aoustrong{#TITRE|supprimer_numero{},#ENV{id_rubrique}|=={#ID_RUBRIQUE}})]</li>
+				</BOUCLE_rubriques>
+			</ul>
+		</B_rubriques>
+		
+	[(#REM) <!-- ========================= AGENDA  DES EVENEMENTS ============================== --> ]
+
+		<h2 class='titrerub'><:agenda:agenda:> :
+		<BOUCLE_compte(EVENEMENTS){id_rubrique?}{id_article?}{id_mot?}{id_evenement_source?} {id_evenement ?} {statut=publie} {age_relatif_debut<=0} />
+			[(#TOTAL_BOUCLE|singulier_ou_pluriel{agenda:info_un_evenement,agenda:info_nombre_evenements}|sinon{	<:agenda:aucun_evenement:>})]#SET{yena,#TOTAL_BOUCLE|oui}<//B_compte>
+		</h2>			
+		
+		<B_agenda>
+			
+			<ul>
+		        <BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{statut=publie}>
+		        <li class="even">
+					[(#DATE_DEBUT|affdate_jourcourt|unique)<br />]
+					
+					<BOUCLE_vevent(EVENEMENTS){id_evenement}{tout}>
+							<span class="titreven"><a href='[(#URL_PAGE{article,id_article=#ID_ARTICLE})]'>#TITRE</a></span><br />
+							[<span class="dateven">(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'})</span><br />]
+							[<span class="descriptioneven">(#DESCRIPTIF|PtoBR)</span><br />]
+							[<span class="locationeven">(#LIEU|PtoBR)</span>[<span class="adresseven">(#ADRESSE|PtoBR)</span>]<br />]
+							[<span class="locationeven">(#FORMULAIRE_PARTICIPER{id_evenement}|PtoBr)</span>]
+					</BOUCLE_vevent>
+
+		        </li>
+		        </BOUCLE_agenda>
+				[<li class="pagination">(#PAGINATION{page})</li>]
+			</ul>
+		</B_agenda>
+		
+		<//B_agenda>
+		
+    </div><!-- fin du div centre-article -->
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}{lang}>     
+     
+</div><!-- fin du div page -->
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+<B_articles>
+  [(#ANCRE_PAGINATION|vide)]
+  <ul>
+  <BOUCLE_articles(ARTICLES){id_rubrique=#ENV{id_rubrique_menu}}{pagination 5 #ENV{id_rubrique_menu}}{par date}{inverse}>
+    <li><a href="#URL_ARTICLE">#TITRE</a></li>
+  </BOUCLE_articles>
+  </ul>
+  <div class="pagination">#PAGINATION{precedent_suivant}</div>
+</B_articles>

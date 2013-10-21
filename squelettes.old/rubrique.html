@@ -1,0 +1,28 @@
+<!-- squelette egt v0.5 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+
+#SET{rub_forums,#INCLUDE{fond=inc/inc-rubriques_mots}{titre_mot=afficher_forum}}
+
+<BOUCLE_rubrique_principal (RUBRIQUES) {id_rubrique}> 
+
+[(#REM)Affichage spécifiques]	
+	<BOUCLE_sel(MOTS){id_rubrique}{titre IN afficher_contenu_accueil}>
+		[(#REM)Accueil]
+		
+		[(#TITRE|=={afficher_contenu_accueil}|oui)<INCLURE{fond=inc/inc-home}{env}/>]
+			
+	</BOUCLE_sel>
+
+
+[(#REM)Forum]	
+	[(#ID_RUBRIQUE|in_array{[(#GET{rub_forums}|unserialize)]}|oui)<INCLURE{fond=inc/groupe_forum}{env}/>]
+	
+[(#REM)Affichage par defaut]	
+	[(#ID_RUBRIQUE|in_array{[(#GET{rub_forums}|unserialize)]}|non)<INCLURE{fond=inc/inc-secteurs}{env}/>]	
+	
+	<//B_sel>
+	
+</BOUCLE_rubrique_principal>
+

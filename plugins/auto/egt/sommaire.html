@@ -1,0 +1,140 @@
+<!-- squelette egt v0.6 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{lang}>
+</head>
+
+<body class="page_sommaire">
+<div id="page">
+  
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	 <INCLURE{fond=inc/inc-entete}{lang}>        
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<INCLURE{fond=inc/inc-chemin}{lang}> 
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}{lang}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+
+    <div id="droite"> 
+
+		<INCLURE{fond=inc/inc-aide}{lang}>
+		
+		[(#REM) <!-- affichage du top album --> ]
+		[(#PLUGIN{Splickr}|oui) <INCLURE{fond=inc/inc-splickrbox}{lang}>]
+		
+		[(#REM) <!-- affichage du mini calendrier  --> ]
+		[(#PLUGIN{Agenda}|oui) #CALENDRIER_MINI{#ENV{date},'date',#SELF}]
+
+		[(#REM) <!-- affichage des 2 prochains �v�nements  --> ]
+		[(#PLUGIN{Agenda}|oui) <INCLURE{fond=inc/inc-agenda}{lang}>] 
+
+		<INCLURE{fond=inc/inc-droite}{lang}>
+
+	</div><!-- fin du div droite -->
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+    <div id="centre">
+		<!-- Articles � la une en colonne centrale -->
+		<a name="contenu"></a>
+		<h2 class="invisible"><:egt:a_la_une:></h2> 
+		<BOUCLE_logoaretenir(MOTS){titre=afficher article dans colonne centrale}>
+		[(#LOGO_MOT||inserer_attribut{'title',#TEXTE})]
+		</BOUCLE_logoaretenir>       
+		<BOUCLE_edito(ARTICLES){par date}{inverse}{lang}{titre_mot=afficher article dans colonne centrale}> 
+			<h3 class="#EDIT{titre} centre-top">[(#TITRE|supprimer_numero)]</h3>		 
+			[<div class="#EDIT{chapo} centre-chapeau">(#CHAPO)</div>]	
+			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{400})</div>]			
+			[<div id="ps">(#PS)</div>]
+			[<div id="notes">(#NOTES)</div>]
+			<img src="#CHEMIN{images/calle.png}" width='500' alt='calle'/>
+
+			[<p class="#EDIT{hyperlien} hyperlien"><strong><:voir_en_ligne:> :</strong> <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+		
+			<div class="porfolio-sommaire">
+				 <BOUCLE_portfolio(DOCUMENTS){id_article}{mode=document}{doublons}>
+					<div class="porfolio">
+					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<br />
+					[(#TITRE)]<br /> 
+					[<div class="porfolio-descriptif">(#DESCRIPTIF)</div>]   
+					<div class="porfolio-type">#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]</div> 
+					</div><!-- fin du div porfolio -->    
+				</BOUCLE_portfolio>
+				<img src="#CHEMIN{images/calle.png}" alt="calle" /> 
+			</div><!-- fin du div porfolio sommaire -->
+			
+		</BOUCLE_edito>
+
+		<!-- exclusion des articles lies au mot cle exclure article de dernieres parutions source: http://www.spip-contrib.net/Comment-exclure-des-articles' -->
+		<BOUCLE_exclus(ARTICLES){titre_mot=exclure de dernieres parutions}{doublons}{par id_article}>
+			  </BOUCLE_exclus>
+			  
+		<!-- Test Une : derniers articles a publies -->
+		<BOUCLE_lang_choisie(ARTICLES){lang} {doublons prefere}>
+		  <!--  -Inclu Bonne Langue #ID_ARTICLE -->
+			<BOUCLE_exclu_trad(ARTICLES){doublons exclutrad} {traduction} {exclus}>
+		  <!--  - -Exclu Mauvaise Langue #ID_ARTICLE -->
+			</BOUCLE_exclu_trad>
+		</BOUCLE_lang_choisie>
+		<BOUCLE_lang_origine(ARTICLES) {origine_traduction} {doublons prefere} >
+		  <!--  + Inclu Article original #ID_ARTICLE -->
+			<BOUCLE_exclu_trad2(ARTICLES){doublons prefere} {doublons exclutrad}{traduction} {exclus}>
+		  <!--  +++ Inclu/exclu Traduction Article original #ID_ARTICLE -->
+			</BOUCLE_exclu_trad2>
+		</BOUCLE_lang_origine>
+		<!-- Fin Test Une : derniers articles a publies --> 
+		
+		<!-- DEBUT BOUCLE_exclure_espace_membre-->
+		<BOUCLE_exclure_espace_membre(RUBRIQUES){titre_mot=espace membres}>
+			<BOUCLE_articles_a_exclure(ARTICLES){id_rubrique=#ID_RUBRIQUE}{doublons}{par id_article}{exclus}>
+			</BOUCLE_articles_a_exclure>
+		</BOUCLE_exclure_espace_membre>
+		<!-- FIN BOUCLE_exclure_espace_membre-->
+		
+		<!-- sommaire des 5 derniers articles publi�s -->
+		<h2 class="invisible"><:derniers_articles:></h2> 
+				
+		<div id="actu">    
+		<div class="titrebloc">
+			<BOUCLE_logo_der_parutions(MOTS){titre=exclure de dernieres parutions}>
+			[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}|sinon{<:spip:articles_recents:>})]
+			</BOUCLE_logo_der_parutions>
+		</div>
+
+			<B_actu>
+				[(#ANCRE_PAGINATION)]
+						[(#ENV{debut_articles}|?{'',' '})]			
+				<BOUCLE_actu(ARTICLES){doublons}{par date}{inverse}{doublons exclutrad}{pagination 5}>
+					 <ul> 
+					  <li><h3 class="actu">[(#LOGO_ARTICLE|right||image_reduire{120})]
+					  <a href="#URL_ARTICLE" hreflang="#LANG" title="<:articles_rubrique:>> 
+						  <BOUCLE_titrerubrique(RUBRIQUES){id_rubrique}>[(#TITRE|supprimer_numero)]
+						  </BOUCLE_titrerubrique>">[(#TITRE|supprimer_numero)]
+					  </a></h3>&nbsp;
+					  [<div class="datepubsom">(#DATE|affdate)</div>]
+					  [<div class="centre_intro">(#CHAPO)</div>]
+					  </li>
+					</ul>
+				</BOUCLE_actu>
+				[<p class="pagination">(#PAGINATION)</p>]
+			</B_actu>
+				  
+		</div> <!-- fin du div actu -->        
+
+    </div><!-- fin du div centre --> 
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{lang}{self=#SELF}> 
+	
+</div><!-- fin du div page-->
+  
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>

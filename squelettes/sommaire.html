@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc-head}{env}>
+</head>
+<body>
+<div class="super">
+	
+	<INCLURE{fond=inc-entete}{env}{lang}{page=sommaire}>
+
+	<div class="content"><!-- contenu -->
+		<INCLURE{fond=inc-col-gauche}{env}>
+
+		<div id="article" class="col_princip"><!-- colonne article-->
+			<B_edito>
+			<ul>
+				<BOUCLE_edito(ARTICLES){lang}{titre_mot=afficher article dans colonne centrale}{par date}{inverse}{0,5}{doublons}>
+					<li>
+						<h3><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a></h3>
+						<p>#INTRODUCTION{500}</p>
+						<div class="suite">
+							<a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]"><:genres:lire_suite:></a>
+						</div>
+					</li>
+				</BOUCLE_edito>
+			</ul>
+			</B_edito>
+
+    <B_derniers_articles>
+      #ANCRE_PAGINATION
+      <h2><:derniers_articles:></h2>
+      <ul>
+    <BOUCLE_derniers_articles(ARTICLES){statut=publie}{par date}{inverse}{lang}{pagination 10}{doublons}>
+      [<li>
+				<h3><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a></h3>
+				<p>(#INTRODUCTION{500})</p>
+				<div class="suite">
+					<a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]"><:genres:lire_suite:></a>
+				</div>
+		  </li>]
+    </BOUCLE_derniers_articles>
+    [<p class="pagination">(#PAGINATION{page_simple})</p>]
+      </ul>
+    </B_derniers_articles>
+
+		</div><!-- fin colonne article-->
+	
+		<INCLURE{fond=inc-col-droite}{env}>
+
+	</div><!-- fin contenu-->
+</div><!-- Fin du centrage -->
+
+<INCLURE{fond=footer}{env}>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE webproject>
+<webproject>
+  <project type="Local" name="plugin trad_rub" encoding="utf8" >
+    <upload/>
+    <author/>
+    <email/>
+    <defaultDTD>-//W3C//DTD XHTML 1.0 Strict//EN</defaultDTD>
+    <item url="base/" uploadstatus="1" />
+    <item url="base/trad_rub_tables.php" uploadstatus="1" />
+    <item url="css/" uploadstatus="1" />
+    <item url="css/trad_rub_styles.css" uploadstatus="1" />
+    <item url="formulaires/" uploadstatus="1" />
+    <item url="formulaires/ajouter_traduction.html" uploadstatus="1" />
+    <item url="formulaires/ajouter_traduction.php" uploadstatus="1" />
+    <item url="img_pack/" uploadstatus="1" />
+    <item url="img_pack/Translation-icon_24.png" uploadstatus="1" />
+    <item url="img_pack/Translation-icon_32.png" uploadstatus="1" />
+    <item url="img_pack/Translation-icon.png" uploadstatus="1" />
+    <item url="prive/" uploadstatus="1" />
+    <item url="plugin.xml" uploadstatus="1" />
+    <item url="trad_rub_fonctions.php" uploadstatus="1" />
+    <item url="trad_rub_pipelines.php" uploadstatus="1" />
+    <item url="" uploadstatus="1" />
+    <templates>templates/</templates>
+    <toolbars>toolbars/</toolbars>
+    <annotations/>
+    <item url="prive/editer/" uploadstatus="1" />
+    <item url="prive/editer/barre_traductions_rubrique.html" uploadstatus="1" />
+    <item url="prive/traduire/rubrique.html" uploadstatus="1" />
+    <item url="prive/traduire/" uploadstatus="1" />
+  </project>
+</webproject>

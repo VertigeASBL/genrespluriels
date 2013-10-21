@@ -1,0 +1,120 @@
+#CACHE{7*24*3600}
+
+<BOUCLE_rubrique_principal (RUBRIQUES) {id_rubrique}> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{id_rubrique}> 
+</head>
+
+<body class="page_rubrique">
+
+<div id="page">  
+      
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-entete}{id_rubrique}{lang}>         
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<INCLURE{fond=inc/inc-chemin}{id_rubrique}{lang}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}{env}{lang}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]		
+    <div id="droite">
+		<!-- a retenir -->
+		<INCLURE{fond=inc/inc-aretenir}{lang}> 
+		
+		[(#REM) Plugin nuage]
+		
+		<INCLURE{fond=inc/nuage}{id=3|4}{lang}> 
+		     
+    </div><!-- fin du div droite-->
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+	<div id="centre-rubrique">  
+		<!-- accessibilite -->
+		<div id="noprint">
+			<a name="contenu"></a>
+		</div>
+		<h2 class="invisible"><:rubrique:></h2> 
+	
+			<h2 class="#EDIT{titre} titrerub">[(#TITRE|supprimer_numero)]</h2>
+			[<div id="logorub">(#LOGO_RUBRIQUE|right||image_reduire{130,0})</div>]
+			[<div id="texterub" class="#EDIT{texte} texterub">(#TEXTE)</div>]
+			<h3 class="invisible"><:articles_rubrique:></h3>
+			<!-- Articles et sous-rubriques -->
+
+			
+			
+			[(#REM)Affichage spécifiques]	
+			<BOUCLE_sel(MOTS){id_rubrique}{titre IN afficher_rubrique_par_mots_cles,afficher_rubrique_par_date}>
+				[(#REM)Affiche les articles contenus, groupes par mot clés]
+	
+				[(#TITRE|=={afficher_rubrique_par_mots_cles}|oui)<INCLURE{fond=inc/inc-rubrique_contenu_mots_cles}{env}/>]
+				#SET{annee,#ENV{annee,#DATE|annee}}
+				[(#TITRE|=={afficher_rubrique_par_date}|oui)<INCLURE{fond=inc/inc-selecteur_annee}{env}{annee=#GET{annee}}/>
+				
+				<INCLURE{fond=inc/inc-rubrique_contenu_default}{env}{annee=#GET{annee}}/>
+				]
+			</BOUCLE_sel>
+
+
+				[(#REM)Teste si la rubrique contient des sousrubriques ou plus d'un article]
+	
+				<BOUCLE_rub(RUBRIQUES){id_parent}{0,1}>
+					[(#REM)Affichage par défault]
+					<INCLURE{fond=inc/inc-rubrique_contenu_default}{env}/>
+				</BOUCLE_rub>
+		
+					<BOUCLE_art(ARTICLES){id_rubrique}{1,1}>
+					[(#REM)Affichage par défault]
+					<INCLURE{fond=inc/inc-rubrique_contenu_default}{env}/>
+					</BOUCLE_art>
+					[(#REM) Sinon on affiche le contenu de l'article]
+	
+					<INCLURE{fond=inc/inc-rubrique_un_article}{env}/>
+					<//B_art>
+				<//B_rub>
+			
+			<//B_sel>
+			
+
+
+			<!-- ne pas afficher le formulaire de site si rubrique liee au mot cle ne pas afficher formulaire site -->
+			<B_afficher_annuaire_site>
+				<BOUCLE_afficher_annuaire_site (RUBRIQUES) {titre_mot=ne pas afficher formulaire site}>
+				</BOUCLE_afficher_annuaire_site>
+			</B_afficher_annuaire_site>	
+			#FORMULAIRE_SITE
+			<//B_afficher_annuaire_site>
+
+			<!-- sur le Web -->
+			<B_sites>
+			<div class="engras"><:sur_web:><br /></div>
+			<ul>
+			<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+			<li>[(#LOGO_SITE|right||image_reduire{130})]<div class="engras"><a href="#URL_SITE">#NOM_SITE</a></div>
+			[(#DESCRIPTIF)]<br /><br />
+			</li>
+			</BOUCLE_sites>
+			</ul>
+			</B_sites>
+			
+			[(#REM) Gestion du portfolio et des documents
+			Le critere {env} permet de passer d'autres arguments de la page
+			par exemple l'id_document choisi pour un affichage complet
+			]
+			[(#INCLURE{fond=inc/inc-documents-rubrique}{id_rubrique}{env})]
+			
+
+	
+    	</div><!-- fin du div centre-rubrique -->  
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{lang}{self=#SELF}>
+
+</div><!-- fin du div page-->
+</body>
+</html>
+</BOUCLE_rubrique_principal>

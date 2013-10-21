@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc-head}{env}>
+</head>
+<body>
+<div class="super">
+	
+	<INCLURE{fond=inc-entete}{env}{lang}>
+
+	<div class="content"><!-- contenu -->
+		<INCLURE{fond=inc-col-gauche}{env}>
+
+		<div class="col_princip"><!-- colonne article-->
+			<ul>
+				[(#REM) Articles trouves ]
+				<B_articles>
+				<li class="menu articles">
+					#ANCRE_PAGINATION
+					<h2><:articles:> (#GRAND_TOTAL)</h2>
+					<ul>
+						<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination}>
+						<li><a href="#URL_ARTICLE">#TITRE</a></li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</li>
+				</B_articles>
+				
+				[(#REM) Rubriques trouvees ]
+				<B_rubriques>
+				<li class="menu rubriques">
+					#ANCRE_PAGINATION
+					<h2><:rubriques:> (#GRAND_TOTAL)</h2>
+					<ul>
+						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
+						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+						</BOUCLE_rubriques>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</li>
+				</B_rubriques>
+				
+				[(#REM) Mots-cles trouves ]
+				<B_mots>
+				<li class="menu">
+					#ANCRE_PAGINATION
+					<h2><:mots_clefs:> (#GRAND_TOTAL)</h2>
+					<ul>
+						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
+						<li><a href="#URL_MOT">#TITRE</a></li>
+						</BOUCLE_mots>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</li>
+				</B_mots>
+				
+				[(#REM) Breves trouvees ]
+				<B_breves>
+				<li class="menu">
+					#ANCRE_PAGINATION
+					<h2><:breves:> (#GRAND_TOTAL)</h2>
+					<ul>
+						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
+						<li><a href="#URL_BREVE">#TITRE</a></li>
+						</BOUCLE_breves>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</li>
+				</B_breves>
+				
+				[(#REM) Messages trouves ]
+				<B_messages>
+				<li class="menu">
+					#ANCRE_PAGINATION
+					<h2><:messages_forum:> (#GRAND_TOTAL)</h2>
+					<ul>
+						<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
+						<li><a href="#URL_FORUM"[ title="(#TITRE|attribut_html|couper{80})"]>[(#TEXTE|couper{80})]</a></li>
+						</BOUCLE_messages>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</li>
+				</B_messages>
+				
+				[(#REM) Sites web trouves ]
+				<B_sites>
+				<li class="menu">
+					#ANCRE_PAGINATION
+					<h2><:sites_web:> (#GRAND_TOTAL)</h2>
+					<ul>
+						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
+						<li><a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a></li>
+						</BOUCLE_sites>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</li>
+				</B_sites>
+			</ul>
+		</div><!-- fin colonne article-->
+	
+		<INCLURE{fond=inc-col-droite}{env}>
+
+	</div><!-- fin contenu-->
+</div><!-- Fin du centrage -->
+
+<INCLURE{fond=footer}{env}>
+</body>
+</html>

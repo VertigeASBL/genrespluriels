@@ -1,0 +1,10 @@
+<form id="formulaire_partage_par_mail" method="post" action="#ENV{action}">
+  #ACTION_FORMULAIRE{#ENV{action}}
+  [<input type="hidden" name="url_page" value="(#SELF|url_absolue)" />]
+	<ul>    
+    [<li class="ok">(#ENV{message_ok})</li>]
+    [<li class="erreur">(#ENV{message_erreur})</li>]
+		<li class="text"><input type="text" name="email_partage" value="<:genres:envoyer_par_mail:>" /></li>
+		<li class="submit"  ><input  value="OK" type="submit" /></li>
+	</ul>
+</form>

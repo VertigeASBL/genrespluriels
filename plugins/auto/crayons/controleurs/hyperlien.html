@@ -1,0 +1,114 @@
+[(#REM)
+
+	Controleur pour le crayon 'hyperlien', uniquement html
+
+	(attention pour les syndic_articles et breves, les champs ne sont
+	pas les memes, il faut donc un autre controleur)
+
+]
+#CACHE{0}
+
+<BOUCLE_a(AUTEURS){id_auteur}{tous}>
+<ul>
+	<li class="fieldset" style="#ENV{largeur}px;#ENV{style}">
+		<h3 class="legend"><:crayons:legend_controleur_hyperlien:></h3>
+		<ul>
+			<li class="editer_nom_site">
+				<label for="nom_site"><:form_prop_nom_site:></label>
+				<input class="crayon-active text" name="#ENV{name_nom_site}" id="nom_site"
+			 		size="40" value="[(#NOM_SITE**|entites_html)]" />
+			</li>
+			<li class="editer_url_site">
+				<label for="url_site"><:forum_url:></label>
+				<input class="crayon-active text" name="#ENV{name_url_site}" id="url_site"
+			 		size="40" value="[(#URL_SITE**|entites_html)]" />
+			</li>
+ 		</ul>
+	</li>
+</ul>
+</BOUCLE_a>
+
+<BOUCLE_b(ARTICLES){id_article}{statut==.}>
+<ul>
+	<li class="fieldset" style="#ENV{largeur}px;#ENV{style}">
+		<h3 class="legend"><:crayons:legend_controleur_hyperlien:></h3>
+		<ul>
+			<li class="editer_nom_site">
+				<label for="nom_site"><:form_prop_nom_site:></label>
+				<input class="crayon-active text" name="#ENV{name_nom_site}" id="nom_site"
+			 		size="40" value="[(#NOM_SITE**|entites_html)]" />
+			</li>
+			<li class="editer_url_site">
+				<label for="url_site"><:forum_url:></label>
+				<input class="crayon-active text" name="#ENV{name_url_site}" id="url_site"
+			 		size="40" value="[(#URL_SITE**|entites_html)]" />
+			</li>
+ 		</ul>
+	</li>
+</ul>
+</BOUCLE_b>
+
+<BOUCLE_c(SIGNATURES){id_signature}{statut==.}>
+<ul>
+	<li class="fieldset" style="#ENV{largeur}px;#ENV{style}">
+		<h3 class="legend"><:crayons:legend_controleur_hyperlien:></h3>
+		<ul>
+			<li class="editer_nom_site">
+				<label for="nom_site"><:form_prop_nom_site:></label>
+				<input class="crayon-active text" name="#ENV{name_nom_site}" id="nom_site"
+			 		size="40" value="[(#NOM_SITE**|entites_html)]" />
+			</li>
+			<li class="editer_url_site">
+				<label for="url_site"><:forum_url:></label>
+				<input class="crayon-active text" name="#ENV{name_url_site}" id="url_site"
+			 		size="40" value="[(#URL_SITE**|entites_html)]" />
+			</li>
+ 		</ul>
+	</li>
+</ul>
+</BOUCLE_c>
+
+<BOUCLE_d(FORUMS){id_forum}{statut==.}>
+<ul>
+	<li class="fieldset" style="#ENV{largeur}px;#ENV{style}">
+		<h3 class="legend"><:crayons:legend_controleur_hyperlien:></h3>
+		<ul>
+			<li class="editer_nom_site">
+				<label for="nom_site"><:form_prop_nom_site:></label>
+				<input class="crayon-active text" name="#ENV{name_nom_site}" id="nom_site"
+			 		size="40" value="[(#NOM_SITE**|entites_html)]" />
+			</li>
+			<li class="editer_url_site">
+				<label for="url_site"><:forum_url:></label>
+				<input class="crayon-active text" name="#ENV{name_url_site}" id="url_site"
+			 		size="40" value="[(#URL_SITE**|entites_html)]" />
+			</li>
+ 		</ul>
+	</li>
+</ul>
+</BOUCLE_d>
+
+<BOUCLE_e(SITES){id_syndic=#ENV{id_site}}{statut==.}>
+<ul>
+	<li class="fieldset" style="#ENV{largeur}px;#ENV{style}">
+		<h3 class="legend"><:crayons:legend_controleur_hyperlien:></h3>
+		<ul>
+			<li class="editer_nom_site">
+				<label for="nom_site"><:form_prop_nom_site:></label>
+				<input class="crayon-active text" name="#ENV{name_nom_site}" id="nom_site"
+			 		size="40" value="[(#NOM_SITE**|entites_html)]" />
+			</li>
+			<li class="editer_url_site">
+				<label for="url_site"><:forum_url:></label>
+				<input class="crayon-active text" name="#ENV{name_url_site}" id="url_site"
+			 		size="40" value="[(#URL_SITE**|entites_html)]" />
+			</li>
+ 		</ul>
+	</li>
+</ul>
+</BOUCLE_e>
+
+<//B_d>
+<//B_c>
+<//B_b>
+<//B_a>

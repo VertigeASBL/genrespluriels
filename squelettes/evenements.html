@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+    <INCLURE{fond=inc-head}{env}>
+</head>
+<body class="page-evenements">
+<div class="super">
+
+    <INCLURE{fond=inc-entete}{env}>
+
+    <div class="content"><!-- contenu -->
+        <INCLURE{fond=inc-col-gauche}{env}>
+
+        <div class="col_princip"><!-- colonne article-->
+          <h2 class='titrerub'><:agenda:agenda:></h2>
+
+            <BOUCLE_articles_du_jour(EVENEMENTS){agenda date_debut,jour,(#ENV{date}|annee),(#ENV{date}|mois),(#ENV{date}|jour)}>
+              <div class="boite-grise evenement">
+                <h3>#DATE_DEBUT - #TITRE</h3>
+                #DESCRIPTIF
+                <BOUCLE_description(ARTICLES){id_evenement=#ID_EVENEMENT_SOURCE}>
+                  #CHAPO
+                  #TEXTE
+                </BOUCLE_description>
+              </div>
+            </BOUCLE_articles_du_jour>
+
+						[(#SELF|parametre_url{date_debut,#ENV{date}|affdate{Y-m-d}}|aoustrong{<:agenda:evenements_a_venir:>,#ENV{date_debut,''}|non}) | ]
+						<BOUCLE_debut(EVENEMENTS){par date_debut}{0,1}{id_article?}{id_rubrique?}{id_evenement_source?}{statut=publie}>
+						[(#SELF|parametre_url{date_debut,#DATE_DEBUT|affdate{Y-01-01}}|aoustrong{<:agenda:evenements_depuis_debut:>,#ENV{date_debut,''}|=={#DATE_DEBUT|affdate{Y-01-01}}})]
+						</BOUCLE_debut>
+
+					<B_agenda>
+						<ul>
+					    <BOUCLE_agenda(EVENEMENTS){par date_debut}{pagination #ENV{pagine,20}}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{id_mot?}{id_evenement_source?}{statut=publie}>
+                <li><h4 class="tit-art-rub">
+								    <span class="jour">[(#DATE_DEBUT|affdate_jourcourt|unique)]</span></h4>
+								[(#MODELE{evenement_vevent}|trim|sinon{'?'})]
+					      </li>
+				      </BOUCLE_agenda>
+						</ul>
+						[<p class="pagination">(#PAGINATION{page})</p>]
+					</B_agenda>
+        </div><!-- fin colonne article-->
+
+        <INCLURE{fond=inc-col-droite}{env}>
+
+    </div><!-- fin contenu-->
+</div><!-- Fin du centrage -->
+
+<INCLURE{fond=footer}{env}>
+</body>
+</html>

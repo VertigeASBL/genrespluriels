@@ -1,0 +1,36 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	Social tags
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+	phil@yaquoi.com
+	</auteur>
+	<version>
+	0.9.5
+	</version>
+	<etat>
+	stable
+	</etat>
+	<description>
+		<multi>[fr]Active les r&eacute;seaux sociaux de partage de liens.
+		[en]Activate the social link sharing network buttons.</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Social-tags</lien>
+	<prefix>socialtags</prefix>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<action>insert_head_css</action>
+		<inclure>socialtags_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>insert_head</action>
+		<inclure>socialtags_fonctions.php</inclure>
+	</pipeline>
+    <icon>
+    socialtags.png
+    </icon>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id='cfg' version='[1.10.4;]' />
+	<categorie>communication</categorie>
+</plugin>

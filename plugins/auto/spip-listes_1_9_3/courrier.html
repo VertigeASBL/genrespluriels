@@ -1,0 +1,17 @@
+[<!--(#REM)
+	
+	// $LastChangedRevision: 54965 $
+	// $LastChangedBy: teddy.spip@gmail.com $
+	// $LastChangedDate: 2011-11-28 22:15:28 +0100 (Mon, 28 Nov 2011) $
+	
+	Permet d'afficher la page mirroir du courrier.
+	
+	Appel de la page par :
+		http://<foo.bar>/?page=courrier
+	Ou en intŽgrant les deux lignes ci-dessous dans
+	votre squelette.
+	
+ 
+-->]
+[(#PLUGIN{Z}|oui) <INCLURE{fond=structure}{env}{type=page}{composition=courrier} />]
+[(#PLUGIN{Z}|non) <INCLURE{fond=courrier-defaut}{env}>]

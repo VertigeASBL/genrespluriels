@@ -1,0 +1,10 @@
+<form action="[(#ENV{action})]" method="get">
+	[(#ENV{action}|form_hidden)]
+	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
+	<table>
+	<tr>
+		<td class="text"><input type="text" class="text" size="10" name="recherche" id="recherche" [value="(#ENV{recherche}|?{#ENV{recherche}, <:genres:rechercher:>})"] accesskey="4" /></td>
+		<td class="loupe"><input type="submit" value=""/></td>
+	</tr>
+	</table>
+</form>

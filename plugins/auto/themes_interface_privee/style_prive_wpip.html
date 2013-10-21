@@ -1,0 +1,465 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+#SET{rtl,#ENV{ltr}|choixsiegal{left,'',_rtl}}
+#SET{rtl_inv,#ENV{ltr}|choixsiegal{right,'',_rtl}}
+#SET{chemin_img_pack,#EVAL{_DIR_IMG_PACK}}
+
+
+body {
+	font-family: 'Lucida Grande', Verdana, Arial, 'Bitstream Vera Sans', sans-serif;
+	background-color: #f9f9f9;
+}
+
+h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-texte, div.onglet, div.onglet_on, div.onglet_off, .arial0, .arial1, .arial11, .arial2, .cadre, .cadre-formulaire, .cadre-formulaire-editer, a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base   {
+	font-family: 'Lucida Grande', Verdana, Arial, 'Bitstream Vera Sans', sans-serif;
+}
+
+.formulaire_spip input.text,
+.formulaire_spip input.password,
+.formulaire_spip textarea,
+.formulaire_spip select
+{
+	font-family: 'Lucida Grande', Verdana, Arial, 'Bitstream Vera Sans', sans-serif;
+}
+
+#bandeau-principal {
+	border-bottom: 1px solid #666;
+	
+
+	li.cellule48 {
+		font-weight: normal;
+	}
+	.boutons_admin a.boutons_admin {
+		padding-bottom: 5px;
+	}
+
+	.bandeau_sec {
+		border-color: #666;
+		border-width: 1px;
+
+		-spip-border-bottom-left-radius: 6px;
+		-spip-border-bottom-right-radius: 6px;
+				
+		li.cellule36 {
+			font-weight: normal;
+
+			a:hover {
+				img {
+					border: 1px solid #eee;
+					background-color: #fff;
+				}
+			}
+		}
+	}
+
+	a span.icon_fond {
+		background-color: #aaa;
+	}
+		
+	a:hover span.icon_fond {
+		background-color: [#(#ENV{couleur_claire})];
+	}
+}
+
+#bandeau_couleur {
+	background-color: #464646;
+	background: url([(#CHEMIN{images/dark-grad.gif})]) top repeat-x;
+	border: 0px;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	
+	a, a.icone26 {
+		color: white;
+	}
+
+	a.icone26 img {
+		background-color: #aaa;
+	}
+	a.icone26:hover img {
+		background-color: #GET{claire};
+	}
+	
+	.bandeau_couleur_sous {
+		top: 5px;
+		border: 1px solid #dfdfdf;
+		background-color: #f1f1f1;
+		border-top: 0px;
+		color: #464646;
+		-spip-border-bottom-left-radius: 6px;
+		-spip-border-bottom-right-radius: 6px;
+
+		. :hover {
+			-spip-box-shadow:  0px 0px 2px #999;
+		}
+		
+		a {
+			color: #464646;
+		}
+	}
+	
+}
+
+
+.plan-articles, .plan-articles-bloques {
+	border-color: #dfdfdf;
+}
+.plan-articles a, .plan-articles-bloques .publie, .plan-articles-bloques .prepa, .plan-articles-bloques .prop, .plan-articles-bloques .refuse, .plan-articles-bloques .poubelle { 
+	background-color: white;
+	-spip-transition-property: background-color color border-color;
+	-spip-transition-duration: 0.2s;
+	
+}
+.plan-articles a:hover { 
+	background-color: #f8f8f8; 
+}
+
+div.bandeau_rubriques {
+	background-color: white;
+}
+a.bandeau_rub  {
+	border-color: #dfdfdf;
+	background-image: url(#GET{chemin_img_pack}rubrique-12.gif);
+}
+div.petit-secteur, a.petit-secteur { 
+	background-image: url(#GET{chemin_img_pack}secteur-12.gif); 
+}
+div.brt { background: url(#GET{chemin_img_pack}triangle-droite[(#GET{rtl})].gif) [(#GET{right})] center no-repeat; }
+
+a.bandeau_rub:hover {
+	background-color: #f8f8f8;	
+}
+
+.icone36 {
+	a img, img {
+		-spip-border-radius: 6px;
+	}
+}
+
+.icone36 a img, a.icone36 img, .icone36 a:hover img, a.icone36:hover img {
+	border: 0px;
+	margin-bottom: -12px;
+	background-color: transparent;
+	display: none;
+}
+
+.icone36 a img:only-child, a.icone36 img:only-child, .icone36 a:hover img:only-child, a.icone36:hover img:only-child {
+	display: inline;
+}
+
+.danger, a.cellule-h-texte {
+	background: none;
+}
+
+.icone36 {
+	width: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.icone36 a span, a.icone36 span {
+	-spip-border-radius: 10px;
+	border: 1px solid #ddd;
+	padding: 3px 10px;
+	width: auto;
+	font-weight: normal;
+	font-size: 11px;
+	text-shadow: white 0px 1px 0px;
+	color: #464646;
+	background-color: #ddd;
+	height: auto;
+	
+	-spip-transition-property: background-color color border-color;
+	-spip-transition-duration: 0.2s;
+	
+	. :hover {
+		color: black;
+		border-color: #888;
+		text-shadow: black 0px -1px 0px;
+		background: #666;
+		color: white;
+	}
+}
+
+.cadre, .dater {
+	border-color: #dfdfdf;
+	-spip-border-radius: 6px;
+	
+	. :hover {
+		-spip-box-shadow:  0px 0px 2px #ccc;
+	}
+
+	.titrem {
+		background: url(#CHEMIN{images/gray-grad.png});
+		padding-top: 6px;
+		padding-bottom: 6px;
+		text-shadow: white 0px 1px 0px;
+		
+	}
+	.deplie, .deplie, .depliant, .replie {
+		a.titremancre {
+			border-#GET{left}: 1px solid #ddd;
+			margin-#GET{left}: 10px;
+			margin-#GET{right}: 0px;
+			padding-#GET{left}: 16px;
+			background-position: top #GET{right};
+			
+			-spip-opacity:0.5; 
+			
+			float: #GET{right};
+			
+			. :hover {
+				-spip-opacity: 1; 
+			}
+
+		}
+	}
+	.replie a.titremancre { 
+		background-image: url(#GET{chemin_img_pack}deplierhaut[(#GET{rtl_inv})].gif); 
+	}
+}
+
+.cadre-sous_rub {
+	background-color: #ededed;
+}
+
+.cadre-couleur-foncee {
+	border: 1px solid [(#GET{claire})];
+}
+
+.cadre-forum {
+	border-color: #dfdfdf;
+	-spip-border-bottom-left-radius: 0px;
+	-spip-border-bottom-right-radius: 0px;
+}
+.cadre-thread-forum {
+	-spip-border-radius: 0px;
+}
+
+.fiche_objet, .no_onglets .fiche_objet {
+	border-color: #dfdfdf;
+	-spip-border-radius: 6px;
+}
+
+div.liste, div.cadre-liste {
+	border-color: #dfdfdf;
+	-spip-border-bottom-left-radius: 0px;
+	-spip-border-bottom-right-radius: 0px;
+
+	table {
+	
+		.tr_liste {
+			-spip-transition-property: background-color color border-color;
+			-spip-transition-duration: 0.2s;
+			background-color: white;
+			
+			td {
+				border-color:#dfdfdf;
+			}
+		}
+		.tr_liste_over, .tr_liste:hover {
+			background-color: #f8f8f8;
+			
+		}
+	}
+	
+	.titrem.hover {
+		background-color: #eee;
+	}
+
+	.tranches {
+		padding: 4px 0px 4px 10px;	
+		background-color: #dfdfdf;
+		border-color: #f0f0f0;
+		border-top: 0;
+	}
+}
+
+
+.entete-formulaire {
+	margin-bottom: 20px;
+	padding: 10px;
+	border: 1px solid #dfdfdf;
+	-spip-border-radius: 6px;
+}
+
+
+div.onglet_off {
+	background-color: #464646;
+	border-color: #464646;
+}
+div.onglet {
+	background-color: inherit;
+	background: url(#CHEMIN{images/gray-grad.png});		
+	border-color: #dfdfdf;
+	
+	a {
+		color: #aaa;
+	}
+}
+div.onglet_on {
+	background-color: #[(#ENV{couleur_claire}|couleur_eclaircir)];
+}
+
+.dater { 
+	border: 1px solid #dfdfdf; 
+	-spip-border-radius: 6px;
+	color: #666;
+	margin-top: 20px;
+}
+.dater .hover, .editer_mot .hover, .editer_auteurs .hover { background-color: #eee; }
+
+
+.formulaire_spip {
+	border: 0px;
+	padding: 0px;
+	
+	li {
+		padding-right: 0px;
+		padding-left: 0px;
+		
+		label {
+			color: #444;
+			text-shadow: white 0px 1px 0px;
+			
+		}
+	}
+	
+	li, li.gauche {
+		padding-#GET{left}: 130px;
+	}
+
+
+
+	li .erreur_message {
+		border-color: #dfdfdf;
+		-spip-border-top-left-radius: 6px;
+		-spip-border-top-right-radius: 6px;
+	}
+	
+	.erreur_message + .explication {
+		-spip-border-top-left-radius: 0px;
+		-spip-border-top-right-radius: 0px;		
+	}
+	
+	.explication {
+		border-color: #dfdfdf;
+		background: url(#CHEMIN{images/gray-grad.png});
+		-spip-border-top-left-radius: 6px;
+		-spip-border-top-right-radius: 6px;
+	}
+	
+	.erreur_message + input[type=text], .erreur_message + input[type=password], .erreur_message + textarea, .explication + input[type=text], .explication + input[type=password], .explication + textarea
+	{
+		-spip-border-top-left-radius: 0px;
+		-spip-border-top-right-radius: 0px;
+	}
+
+	li.editer_parent, li.editer_groupe_mot, li.editer_descriptif, li.editer_chapo, li.editer_texte, li.editer_ps, li.editer_url_zip_plugin2, li.haut 
+	{
+		padding-#GET{left}:0px;
+		padding-top:10px;
+	}	
+	.editer_titre.obligatoire {
+		input {
+			font-size: 200%;
+			font-weight: normal;
+		}
+	}
+	
+	p.boutons {
+		background-color: inherit;
+		border: 0px;
+		padding-#GET{right}: 0px;
+	}
+		
+}
+
+.formulaire_spip li.editer_parent {
+	border: 1px solid #dfdfdf;	
+	background-color: #ededed;
+	padding-#GET{left}: 10px;
+	padding-#GET{right}: 10px;
+	-spip-border-radius: 6px;
+}
+.formulaire_spip li.editer_groupe_mot, .formulaire_editer_auteur li.editer_statut {
+	background-color: inherit;
+}
+
+
+.formulaire_spip fieldset {
+	border: 1px solid #dfdfdf;	
+	margin-#GET{left}: 0px;
+	margin-bottom: 10px;
+	-spip-border-radius: 6px;
+	
+	legend, h3.legend {
+		background: url(#CHEMIN{images/gray-grad.png});
+		padding: 6px;
+	}
+	
+	li {
+		padding-#GET{right}: 10px;
+		margin-#GET{left}: 10px;
+		
+		input.text, input.password, textarea.textarea {
+			border: 1px solid #dfdfdf;		
+		}
+	}
+
+
+	
+}
+.formulaire_editer_article li.editer_liens_sites {
+	border: 0px;
+}
+
+input[type=text], input[type=password], textarea {
+	border: 1px solid #dfdfdf;
+	-spip-border-radius: 6px;
+}
+
+input[type="submit"] {
+	background-color: [#(#ENV{couleur_foncee}|couleur_luminance{0.3})];
+	-spip-gradient: top, [#(#ENV{couleur_foncee}|couleur_luminance{0.2})], [#(#ENV{couleur_foncee}|couleur_luminance{0.4})];
+	border: 1px solid [#(#ENV{couleur_foncee}|couleur_luminance{0.6})];
+	padding: 3px 10px;
+	font-weight: bold;
+	color: black;
+	-spip-border-radius: 10px;
+	-spip-transition-property: background-color color border-color;
+	-spip-transition-duration: 0.2s;
+
+}
+input[type="submit"]:hover {
+	color: white;
+	background-color: [#(#ENV{couleur_foncee}|couleur_luminance{0.7})];
+	-spip-gradient: top, [#(#ENV{couleur_foncee}|couleur_luminance{0.6})], [#(#ENV{couleur_foncee}|couleur_luminance{0.8})];
+	border: 1px solid [#(#ENV{couleur_foncee}|couleur_luminance{0.7})];
+	-spip-box-shadow: 0px 0px 3px #555555;
+}
+
+.configuration #contenu .cadre-trait-couleur .titrem { color: #444; }
+
+
+#FILTRE{css_imbriques_decouper}

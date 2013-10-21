@@ -1,0 +1,68 @@
+<!-- squelette egt v0.6 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+<!-- squelette pr�sentant les �v�nements -->
+#CACHE{86400}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}{lang} {titreheader=<:agenda:agenda:>}>
+</head>
+
+<body class="page_agenda">
+
+<div id="page">  
+ 
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=inc/inc-entete}{lang}>          
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<div id="navigation">
+		<a href="#URL_SITE_SPIP/?lang=#LANG"><:accueil_site:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/>
+		<:agenda:agenda:>
+	</div><!-- fin de haut -->    
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}{lang}>
+
+[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+
+    <div id="droite"> 
+
+		[(#REM) <!-- affichage du mini calendrier  --> ]
+		#CALENDRIER_MINI{#ENV{date},'date',#SELF} 
+
+		[(#REM) <!-- affichage des 2 prochains �v�nements  --> ]
+		[(#PLUGIN{Agenda}|oui) <INCLURE{fond=inc/inc-agenda}{lang}>] 
+		
+	</div><!-- fin du div droite -->
+	
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]    
+    <div id="centre-rubrique">	
+		<!-- accessibilite -->
+		<div id="noprint">
+			<a name="contenu"></a>
+		</div> 	
+
+	[(#REM) <!-- ============================ AGENDA MENSUEL ================================ --> ]   
+	
+
+	<BOUCLE_agendaEvts(EVENEMENTS){age<0}{par date}{statut=publie}>
+		[(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,#TITRE,#DESCRIPTIF,#LIEU,#URL_ARTICLE, 'couleur'})]
+		[(#DATE_DEBUT|Agenda_memo_evt_full{#DATE_FIN,#TITRE,#DESCRIPTIF,#LIEU,#URL_ARTICLE, 'couleur'})]
+	</BOUCLE_agendaEvts>
+
+		[(#DATE|Agenda_affiche_full{<:aucun_article:>, 'mois'})]
+
+		
+    </div><!-- fin du div centre-rubrique -->
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}{lang}>     
+     
+</div><!-- fin du div page -->
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>

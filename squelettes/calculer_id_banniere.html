@@ -1,0 +1,39 @@
+<BOUCLE_si_sommaire(CONDITION){si #ENV{page}|=={sommaire}}>
+
+  0
+
+</BOUCLE_si_sommaire>
+
+  [(#REM) on commence par récupérer l'id de la rubrique en cours.]
+  <BOUCLE_si_breve(CONDITION){si #ID_BREVE}>
+    <BOUCLE_brv(BREVES){id_breve}>
+      #SET{id_rubrique, #ID_RUBRIQUE}
+    </BOUCLE_brv>
+  </BOUCLE_si_breve>
+
+  <BOUCLE_si_article(CONDITION){si #ID_ARTICLE}>
+    <BOUCLE_art(ARTICLES){id_article}>
+      #SET{id_rubrique, #ID_RUBRIQUE}
+    </BOUCLE_art>
+  </BOUCLE_si_article>
+
+  <BOUCLE_si_rubrique(CONDITION){si #ID_RUBRIQUE}>
+    <BOUCLE_r(RUBRIQUES){id_rubrique}>
+      #SET{id_rubrique, #ID_RUBRIQUE}
+    </BOUCLE_r>
+  </BOUCLE_si_rubrique>
+
+
+  [(#REM) On parcourt la hiérarchie pour chercher si un mot clé de bannière
+          est défini.]
+  <BOUCLE_rub(RUBRIQUES){id_rubrique=#GET{id_rubrique}}>
+    <BOUCLE_hier(HIERARCHIE){id_rubrique}{tout}>
+      <BOUCLE_getBanner(MOTS){id_groupe=5}{id_rubrique}>
+
+        [(#ID_MOT|moins{58})]
+
+      </BOUCLE_getBanner>
+    </BOUCLE_hier>
+  </BOUCLE_rub>
+    
+<//B_si_sommaire>

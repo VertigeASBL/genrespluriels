@@ -1,0 +1,122 @@
+#SET{banniere, #INCLURE{fond=calculer_id_banniere, env}|trim}
+[(#GET{banniere}|=={''}|oui)
+  #SET{banniere, 0}
+]
+
+<div class="head banner_#GET{banniere}"><!-- banniere et menu horizontale-->
+	<div class="langues"><!-- menu langues-->
+		<INCLURE{fond=inc-lang}{env}>
+	</div>
+	
+	<div class="plan_contact"><!-- menu plan du site-->
+		
+		<BOUCLE_contact(RUBRIQUES){titre=40. Contact}{lang}{0,1}>
+				<a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a>
+		</BOUCLE_contact>
+		
+		
+		  - <a href="[(#URL_PAGE{plan}|parametre_url{'lang',#LANG})]"><:genres:plan_site:></a>
+	</div>
+
+  <a id="lien_sommaire" href="[(#URL_SITE_SPIP|parametre_url{lang, #LANG})]"
+     title="[(#DESCRIPTIF_SITE_SPIP|PtoBR)]"></a>
+
+	<div class="nav"><!-- menu horizontal-->            
+		<ul id="menu">
+			[(#REM) On affiche le menu principal en fonction de mot clée afficher topnav ]
+			[(#REM) D'abord les rubriques ]
+			<B_menuPrinc>
+			<BOUCLE_menuPrinc(RUBRIQUES){titre_mot=afficher topnav}{lang}{doublons}{par num titre}>
+				<li [class="(#COMPTEUR_BOUCLE|alterner{rouge, noir, bleu, turquoise, brun, rose, vert})"]>
+          
+          <a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a>
+
+          #SET{elements-sous-menu, #ARRAY}
+          <BOUCLE_sous-menu-rub(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par titre}>
+            [(#SET{elements-sous-menu, #GET{elements-sous-menu}
+              |push{#ARRAY{titre,#TITRE,url,#URL_RUBRIQUE}}})]
+          </BOUCLE_sous-menu-rub>
+  
+          <B_afficher-sous-menu>
+            <ul class="sous-menu">
+              <BOUCLE_afficher-sous-menu(POUR){tableau #GET{elements-sous-menu}}>
+                <li><a href="[(#VALEUR|table_valeur{url})]"
+                       title="[(#VALEUR|table_valeur{titre})]">
+                    [(#VALEUR|table_valeur{titre})]
+                </a></li>
+              </BOUCLE_afficher-sous-menu>
+            </ul>
+          </B_afficher-sous-menu>
+
+        </li>
+			</BOUCLE_menuPrinc>
+        #SET{compteur_total, #TOTAL_BOUCLE}
+			</B_menuPrinc>
+			<//B_menuPrinc>
+			
+			[(#REM) Ensuite les articles ]
+			
+			<B_menuPrincA>
+			<BOUCLE_menuPrincA(ARTICLES){titre_mot=afficher topnav}{lang}{doublons}{par num titre}>
+				<li [class="(#GET{compteur_total}|plus{#COMPTEUR_BOUCLE}|alterner{rouge, noir, bleu, turquoise, brun, rose, vert})"]><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a></li>
+			</BOUCLE_menuPrincA>
+        #SET{compteur_total, #GET{compteur_total}|plus{#TOTAL_BOUCLE}}
+			</B_menuPrincA>
+			<//B_menuPrincA>
+			[(#REM) Fin afficher topnav ]
+		 </ul>
+	</div><!-- fin menu horizontal-->
+
+<script type="text/javascript">
+//<![CDATA[
+/*
+  Auteur : Laurent BRACQUART <lbracquart(at)atalan.fr>
+  URL : http://atalan.fr/
+  Date de création : 26 Mai 2011
+  Version : 1.0
+*/
+$('.sous-menu').hide();
+$(document).ready(function() {
+  $('ul#menu > li')
+    .addClass('cache')
+    .bind('mouseover focusin', function() {
+       $(this).removeClass('cache');
+    })
+    .bind('mouseout focusout', function() {
+      $(this).addClass('cache');
+    });
+  $('.sous-menu').show();
+});
+//]]>
+</script>
+
+</div><!-- fin head-->
+
+<div class="barre_news"><!-- formulaire newsletter contact et recherche-->
+	<ul>
+		<li class="news"><!-- formulaire newsletter -->
+			<h3><:genres:newsletter:></h3>
+			#FORMULAIRE_SPIP_LISTES_INSCRIPTION
+		</li>
+		<li class="contact"><!-- formulaire newsletter -->
+			<h3><:genres:partage:></h3>
+      #FORMULAIRE_PARTAGE_PAR_MAIL
+		</li>
+		<li class="facebook"><a href="http://www.facebook.com/genres.pluriels?ref&#61;ts&amp;fref&#61;ts"></a></li><!-- bouton lien facebook -->
+		<li class="imprim">
+			<table>
+			<tr>
+        [<td class="article_pdf">
+          (#ARTICLE_PDF{id_article})
+        </td>]
+				<td class="logo1" valign="bottom"><a href="#" id="fontmoin">A<span style="font-style:normal;">-</span></a></td><!-- bouton pour diminuer taille de texte -->
+				<td class="logo2" valign="bottom"><a href="#" id="fontplus">A<span style="font-style:normal;">+</span></a></td>
+			</tr>
+			</table><!-- bouton pour augmenter taille de texte -->
+				  
+		</li>
+		<li class="search"><!-- formulaire recherche -->
+			#FORMULAIRE_RECHERCHE
+		</li>
+	</ul>
+</div><!-- fin formulaire newsletter contact et recherche-->

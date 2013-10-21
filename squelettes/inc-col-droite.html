@@ -1,0 +1,47 @@
+<div class="col_right"><!-- colonne droite-->
+	<ul>
+		<li class="nav_vert" id="menu_droite"><!-- navigation verticale gauche-->
+			<ul>
+				
+				<BOUCLE_secteurs(RUBRIQUES) {racine} {lang} {par titre} {!titre_mot=exclure du menu}>
+					<BOUCLE_rubriques(RUBRIQUES){par titre, num titre}{id_parent}{!titre_mot=exclure du menu}>
+					<li [class="(#COMPTEUR_BOUCLE|alterner{festival, trans, inter, proches, pro})"]><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
+					</BOUCLE_rubriques>
+				</BOUCLE_secteurs>
+				
+			</ul>
+		</li>    <!-- fin navigation verticale gauche-->
+		
+		<li class="calendrier">
+			<div class="ajax">
+				[(#PLUGIN{Agenda}|oui) #CALENDRIER_MINI{#DATE,'date',#URL_PAGE{evenements}}]
+			</div>
+		</li><!-- calendrier-->
+		<li class="tag">
+			<INCLURE{fond=nuage}{env}>
+		</li><!-- nuage de tags-->
+		<li class="stats"><!-- statistiques-->
+			
+			<BOUCLE_Afficher_statistiques(MOTS){titre=afficher statistiques}>
+				
+				<h2><:spip:titre_statistiques:></h2>
+				<ul>
+					<li>
+						<!-- affichage des visites du site -->
+						<h3><:egt:visites:>:</h3>
+						[<p>(#VISITEURS_CONNECTES) <:egt:visiteurs_connectes:><br />]
+				    	[(#POPULARITE_SITE) <:egt:par_jour:><br />]
+				    	[(#TOTAL_VISITES) <:egt:depuis_debut:></p>]
+					</li>
+					<li>
+						<h3><:egt:publication:>:</h3>
+						<p><B_tous_articles><BOUCLE_tous_articles(ARTICLES){tout}{par date}{inverse}></BOUCLE_tous_articles>0</B_tous_articles>#TOTAL_BOUCLE<//B_tous_articles> <:articles:><br /> 
+							<B_tous_breves><BOUCLE_tous_breves(BREVES){tout}></BOUCLE_tous_breves>0</B_tous_breves>#TOTAL_BOUCLE<//B_tous_breves> <:breves:><br /> 
+							<B_tous_sites><BOUCLE_tous_sites(SITES){tout}></BOUCLE_tous_sites>0</B_tous_sites>#TOTAL_BOUCLE<//B_tous_sites> <:spip:icone_sites_references:></p>
+					</li>
+				</ul>
+			</BOUCLE_Afficher_statistiques>
+			<div class="cache"></div>
+		</li>
+	</ul>
+</div><!--fin  colonne droite-->

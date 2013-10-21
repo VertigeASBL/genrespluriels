@@ -1,0 +1,106 @@
+[(#REM) <!-- affichage du mini calendrier. Les variables d'environnement sont : 
+	- date: la date courante dans le contexte
+	- var_date: le nom de la variable date dans l'url. Cette date est sous le format aaaa-mm
+	- self: l'url du contexte. Pour fonctionner, la noisette insre un parametre url de la &var_date=aaaa-mm
+--> ]
+<div id="noisette_miniagenda" class="noisette">
+	<h1><a class="intitule" href="[(#URL_PAGE{agenda,[id_rubrique=(#RACINE_SPECIALISEE{agenda})][&amp;annee=(#AUJOURDHUI|annee)][&amp;mois=(#AUJOURDHUI|mois)]})]"><:sarkaspip:agenda:></a></h1>
+	<div class="contenu">
+		[(#REM) <!-- Liens vers les annees precedentes et suivantes -->]
+		[<h2><a class="titre_bloc bord ajax" href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|annee|moins{1})]-[(#ENV{date}|mois)]})" title="[(#ENV{date}|nom_mois|ucfirst)]&nbsp;[(#ENV{date}|annee|moins{1})]">[(#CONFIG{sarkaspip_agenda/icone_precedent, &lt;&lt;})]</a></h2>]
+		[<h2 class="titre_bloc centre">(#ENV{date}|annee)</h2>]
+		[<h2><a class="titre_bloc bord ajax" href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|annee|plus{1})]-[(#ENV{date}|mois)]})" title="[(#ENV{date}|nom_mois|ucfirst)]&nbsp;[(#ENV{date}|annee|plus{1})]">[(#CONFIG{sarkaspip_agenda/icone_suivant, &lt;&lt;})]</a></h2>]
+		[(#REM) <!-- Liens vers les mois precedents et suivants -->]
+		[<h2><a class="titre_bloc bord ajax" href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_moisdecal{-1,'Y-m-01'})]})" title="[(#ENV{date}|Agenda_moisdecal{-1,'Y-m'}|affdate_mois_annee|ucfirst)]">[(#CONFIG{sarkaspip_agenda/icone_precedent, &lt;&lt;})]</a></h2>]
+		[<h2 class="titre_bloc centre">(#ENV{date}|nom_mois|ucfirst)</h2>]
+		[<h2><a class="titre_bloc bord ajax" href="(#ENV{self}|parametre_url{#ENV{var_date},[(#ENV{date}|Agenda_moisdecal{1,'Y-m-01'})]})" title="[(#ENV{date}|Agenda_moisdecal{1,'Y-m'}|affdate_mois_annee|ucfirst)]">[(#CONFIG{sarkaspip_agenda/icone_suivant, &lt;&lt;})]</a></h2>]
+		<div class="clearer"></div>
+		[(#REM) <!-- Agenda du mois choisi -->]
+		<table summary="<:sarkaspip:resume_mini_agenda:>">
+			[(#REM) <!-- En-tete du calendrier (les jours abreges) -->]
+			<thead>
+				<tr>
+					#SET{index, #CONFIG{sarkaspip_agenda/jour1, 1}|modulo{7}}
+					[<th scope="col"><abbr[ title="(#GET{index}|agenda_nom_jour|ucfirst)"]>(#GET{index}|agenda_nom_jour|spip_substr{0,2}|ucfirst)</abbr></th>]
+					#SET{index, #GET{index}|plus{1}|modulo{7}}
+					[<th scope="col"><abbr[ title="(#GET{index}|agenda_nom_jour|ucfirst)"]>(#GET{index}|agenda_nom_jour|spip_substr{0,2}|ucfirst)</abbr></th>]
+					#SET{index, #GET{index}|plus{1}|modulo{7}}
+					[<th scope="col"><abbr[ title="(#GET{index}|agenda_nom_jour|ucfirst)"]>(#GET{index}|agenda_nom_jour|spip_substr{0,2}|ucfirst)</abbr></th>]
+					#SET{index, #GET{index}|plus{1}|modulo{7}}
+					[<th scope="col"><abbr[ title="(#GET{index}|agenda_nom_jour|ucfirst)"]>(#GET{index}|agenda_nom_jour|spip_substr{0,2}|ucfirst)</abbr></th>]
+					#SET{index, #GET{index}|plus{1}|modulo{7}}
+					[<th scope="col"><abbr[ title="(#GET{index}|agenda_nom_jour|ucfirst)"]>(#GET{index}|agenda_nom_jour|spip_substr{0,2}|ucfirst)</abbr></th>]
+					#SET{index, #GET{index}|plus{1}|modulo{7}}
+					[<th scope="col"><abbr[ title="(#GET{index}|agenda_nom_jour|ucfirst)"]>(#GET{index}|agenda_nom_jour|spip_substr{0,2}|ucfirst)</abbr></th>]
+					#SET{index, #GET{index}|plus{1}|modulo{7}}
+					[<th scope="col"><abbr[ title="(#GET{index}|agenda_nom_jour|ucfirst)"]>(#GET{index}|agenda_nom_jour|spip_substr{0,2}|ucfirst)</abbr></th>]
+				</tr>
+			</thead>
+			
+			<tbody>
+				<BOUCLE_calendrier(EVENEMENTS) {agendafull date_debut, date_fin, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>
+					 [(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,#TITRE,#DESCRIPTIF,#LIEU,#URL_ARTICLE, '#000000'})] 
+				</BOUCLE_calendrier>
+				[(#ENV{date}|agenda_mini)]
+			</tbody>
+		</table>
+
+		[(#REM) <!-- On affiche le lien vers aujourd hui-->]
+		[<h2><a id="aujourdhui" class="titre_bloc" href="(#ENV{self}|parametre_url{#ENV{var_date},[(#AUJOURDHUI|annee)]-[(#AUJOURDHUI|mois)]})"title="[(#AUJOURDHUI|nom_mois|ucfirst)]&nbsp;[(#AUJOURDHUI|annee)]"><:sarkaspip:aujourdhui|ucfirst:></a></h2>]
+
+		<div class="clearer"></div>
+		[(#REM) <!-- On affiche les evenements en cours et ceux des X prochains jours-->]
+			<B_mois>
+			<table id="footer_evenements">
+			<tbody>
+			<BOUCLE_mois(EVENEMENTS){agendafull date_debut,date_fin}{par date_debut}{lang_select=non}{age_fin<=0}{age_debut>-(#CONFIG{sarkaspip_agenda/max_mois_resume, 6}|mult{30})}{0,(#CONFIG{sarkaspip_agenda/taille_resume, 5})}>					
+				<BOUCLE_article_a_venir(ARTICLES){id_evenement}>#SET{titre_article2,#TITRE}#SET{id_article,#ID_ARTICLE}</BOUCLE_article_a_venir>
+			<tr>	<td class="footer_colg">
+				[(#DATE_DEBUT|affdate{'d-m'})][&nbsp;&nbsp;(#DATE_FIN|affdate{'d-m'}):]
+				</td>
+				<td class="footer_cold">
+				<a href="[(#URL_PAGE{evenement,id_article=[(#GET{id_article})]}|parametre_url{id_evenement,#ID_EVENEMENT})]"
+				title=" 
+[(#DATE_DEBUT|jour|=={[(#DATE_FIN|jour)]}|?{
+	<:sarkaspip:le:> [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)] 
+	[(#HORAIRE|=={oui}|?{
+		[(#REM) memes heures ?]
+	    	[(#DATE_DEBUT|=={#DATE_FIN}|?{
+				<:sarkaspip:agrave:> [(#DATE_DEBUT|heures)] H [(#DATE_DEBUT|minutes)],''})]
+	   	[(#REM) pas memes heures ?]
+	     	[(#DATE_DEBUT|!={#DATE_FIN}|?{
+			 	<:sarkaspip:de:> [(#DATE_DEBUT|heures)] H [(#DATE_DEBUT|minutes)] <:sarkaspip:agrave:> [(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)]
+				,''})]
+	,''})]
+,
+	<:sarkaspip:du:> [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)] 
+		[(#HORAIRE|=={oui}|?{
+			<:sarkaspip:a_partir_de:> [(#DATE_DEBUT|heures)]H[(#DATE_DEBUT|minutes)]
+			,''})] 
+	<:sarkaspip:au:> [(#DATE_FIN|nom_jour)]
+	  [(#DATE_FIN|affdate)] 
+	  	[(#HORAIRE|=={oui}|?{
+	  		<:sarkaspip:jusqu_a:> [(#DATE_FIN|heures)]H[(#DATE_FIN|minutes)]
+			,''})]  
+})]
+[-&nbsp;lieu&nbsp;:(#LIEU)]"
+	  >[(#GET{titre_article2}|supprimer_numero|couper{50})]</a>
+				</td>
+			</tr>	
+			</BOUCLE_mois>
+			</tbody>
+			</table>
+			</B_mois>
+			<:sarkaspip:msg_0_evt_agenda:>
+			<//B_mois>
+	
+	</div> <!-- div contenu -->
+</div> <!-- class noisette-->
+<!-- 
+
+					<BOUCLE_article(ARTICLES){id_evenement}>
+						#SET{titre_article,#TITRE}
+					</BOUCLE_article>
+ -->
+					
+

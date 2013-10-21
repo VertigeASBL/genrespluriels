@@ -1,0 +1,866 @@
+/*************************/
+/****** Sommaire *********/
+/*************************/
+
+/* - Couleurs                         */
+/* - CSS Document                     */
+/* - banniere et menu horizontale     */
+/* - menu langues                     */
+/* - menu plan du site et contact     */
+/* - menu horizontal                  */
+/* - comportement du Menu             */
+/* - formulaire newsletter et contact */
+/* - bouton facebook                  */
+/* - boutons pdf et taille texte      */
+/* - formulaire recherche             */
+/* - Fil d'Ariane                     */
+/* - colonne de gauche                */
+/* - menu secondaire                  */
+/* - colonne principale               */
+/* - pagination                       */
+/* - portfolio                        */
+/* - pétitions                        */
+/* - colonne gauche                   */
+/* - navigation verticale             */
+/* - colonne de stats                 */
+/* - footer                           */
+/* - Calendrier                       */
+/* - plan                             */
+
+@import "compass/css3/border-radius";
+
+@charset "utf-8";
+
+/* Couleurs */
+$gris: #EEE;
+$rouge: #ed2026;
+$noir: #000;
+$bleu: #453CF9;
+$violet: #6c34a2;
+$turquoise: #01b8a0;
+$brun: #934711;
+$rose: #cb7280;
+$vert: #76a147;
+
+.boite-grise {
+  background: $gris;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* CSS Document */
+body {
+  background-color: #FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  width: 100%;
+  margin: 0px auto 0;
+  text-align: center; }
+
+#boutons_admin_supp {
+    font-size: 11px;
+    left: 15px;
+    top: -2px;
+}
+
+.super {
+  width: 980px;
+  text-align: left;
+  margin: 0 auto 0; }
+
+/* banniere et menu horizontale*/
+.head {
+  width: 980px;
+  background-position: top;
+  background-repeat: no-repeat;
+  float: left;
+  margin: 0 auto 0; }
+
+/*menu langues*/
+.langues {
+  float: right;
+  color: #b62695;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+  margin-top: 15px;
+  padding-right: 10px;
+  margin-left: 40px; }
+
+.langues a {
+  color: #b62695;
+  text-decoration: none; }
+
+.langues a:hover {
+  text-decoration: underline; }
+
+/*menu plan du site et contact*/
+.plan_contact {
+  float: right;
+  color: #000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+  margin-top: 15px; }
+
+.plan_contact a {
+  color: #000;
+  text-decoration: none; }
+
+.plan_contact a:hover {
+  text-decoration: underline; }
+
+a {
+  color: #9a2b98; }
+
+a:hover {
+  color: #9a2b98; }
+
+#lien_sommaire {
+  display: block;
+  height: 190px; }
+
+/* menu horizontal */
+.nav {
+  width: 940px;
+  float: left;
+  margin-top: 0px;
+  font-size: 1.3em;
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: center;
+  padding-left: 30px;
+  a {
+    text-decoration: none;
+  }
+  #menu > li {
+    position: static;
+    &> a {
+      padding: 0 17px 0 10px;
+    }
+  }
+  ul {
+    margin: 0 0 0 0px;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    float: left;
+    text-align: left;
+  }
+  td {
+    margin: 0 auto 0;
+    text-align: center;
+  }
+  .sous-menu {
+    li {
+      float: none;
+      width: 200px;
+      font-size: 80%;
+      a {
+        padding: 5px 10px 5px 20px;
+        width: 170px;
+      }
+    }
+  }
+  li:hover .sous-menu li {
+    position: relative;
+    left: 0;
+  }
+}
+/* ---comportement du Menu */
+#menu {
+  li {
+    position: relative;
+    display: inline;
+  }
+  a {
+    display: inline-block;
+  }
+  ul {
+    position: absolute;
+  }
+  .cache ul {
+    left: -999999px;
+  }
+  ul li {
+    display: block;
+  }
+}
+
+@mixin menu-color($color) {
+  a {
+    background-color: $color;
+    color: white;
+  }
+  &> a {
+    @include border-radius(5px 5px 0 0);
+    border-style: solid;
+    border-width: 2px;
+    border-bottom: none;
+    border-color: lighten($color, 15%);
+  }
+  &.cache a {
+    color: $color;
+    background-color: white;
+    border-color: white;
+  }
+  .sous-menu {
+    background-color: $color;
+    @include border-radius(0 5px 5px 5px);
+    border-style: solid;
+    border-width: 2px;
+    border-color: lighten($color, 15%);
+    border-top: none;
+    a {
+      color: white;
+      @include border-radius(5px);
+      &:hover, &:focus {
+        background-color: lighten($color, 10%);
+      }
+    }
+  }
+}
+
+.rouge {
+  @include menu-color($rouge);
+}
+.noir {
+  @include menu-color($noir);
+}
+.bleu {
+  @include menu-color($violet);
+}
+.turquoise {
+  @include menu-color($turquoise);
+}
+.brun {
+  @include menu-color($brun);
+}
+.rose {
+  @include menu-color($rose);
+}
+.vert {
+  @include menu-color($vert);
+}
+
+/*formulaire newsletter et contact*/
+.barre_news {
+  width: 980px;
+  margin-top: 20px;
+  float: left; }
+
+.barre_news form {
+  margin: 0;
+  padding: 0; }
+
+.barre_news h3 {
+  color: #000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0; }
+
+.barre_news ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.barre_news li {
+  float: left;
+  margin: 0;
+  position: static;
+  padding: 0; }
+
+.news table {
+  border-collapse: collapse;
+  margin: 0 60px 0 0;
+  padding: 0; }
+
+.text input {
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #a9a9a9;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid gainsboro;
+  background-color: #fff;
+  color: #b62595;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 8px 8px 8px 4px;
+  margin: 0;
+  behavior: url(script/PIE.htc);
+  width: 160px; }
+
+.submit input {
+  font-weight: bold;
+  color: #a9a9a9;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid gainsboro;
+  background-color: #f1f1f1;
+  color: #837e78;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 8px 8px 8px 4px !important;
+  padding: 6px 8px 6px 4px;
+  margin: 0 0 0 6px;
+  behavior: url(script/PIE.htc); }
+
+/*bouton facebook*/
+.facebook a {
+  display: block;
+  width: 38px;
+  height: 37px;
+  background-image: url(images/facebook.jpg);
+  margin-top: 19px;
+  margin-right: 46px;
+  margin-left: 52px; }
+
+/* boutons pdf et taille texte */
+.imprim {
+  margin-top: 7px !important;
+  table {
+    float: left;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+  }
+  td {
+    height: 40px;
+  }
+  .article_pdf a {
+    margin-right: 5px;
+    img {
+      margin-top: 14px;
+      vertical-align: middle;
+    }
+  }
+  .logo1 a {
+    font-size: 0.9em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    margin-right: 6px;
+    height: 18px;
+    margin-top: -19px;
+    display: block;
+    text-decoration: none;
+    color: #837e78;
+  }
+  .logo2 a {
+    font-size: 1.4em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: italic;
+    height: 26px;
+    padding-top: 16px;
+    text-decoration: none;
+    color: #837e78;
+    display: block;
+    margin-right: 4px;
+  }
+}
+
+/*formulaire recherche*/
+.search {
+  margin-top: -3px !important;
+}
+
+.search td {
+  margin: 0;
+  padding-top: 20px; }
+
+.loupe input {
+  font-weight: bold;
+  color: #a9a9a9;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid gainsboro;
+  background-color: #f1f1f1;
+  color: #837e78;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 8px 8px 8px 4px !important;
+  padding: 6px 8px 6px 4px;
+  margin: 0 0 0 6px;
+  behavior: url(script/PIE.htc);
+  background-image: url(images/loupe.jpg);
+  background-repeat: no-repeat;
+  width: 40px;
+  background-position: center; }
+
+.content {
+  width: 980px;
+  float: left;
+  margin: 12px 0 0 0; }
+
+/* Fil d'Ariane */
+#hierarchie {
+  margin-bottom: 7px;
+  @extend .boite-grise;
+  padding: 3px 10px;
+  a {
+    color: $bleu;
+  }
+}
+
+/*colonne de gauche*/
+.col_left {
+  float: left;
+  width: 200px; }
+
+.col_left ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.col_left li {
+  margin: 0 0 24px 0;
+  padding: 0; }
+
+/* menu secondaire */
+#menu-gauche {
+  font-family: Georgia,"Times New Roman",Times,serif;
+  padding: 9px 5px;
+  margin: 15px 0 0 0;
+  font-size: 14px;
+  @extend .boite-grise;
+  li {
+    border: none;
+    li { padding-left: 20px; }
+    &> ul, &> div.ajax {
+      display: none;
+      padding-top: 10px;
+    }
+    &.current {
+      &> a { font-weight: bold; }
+      ul {
+        display: block;
+      }
+    }
+    .bouton-deplie {
+      background-image: url('../prive/images/noeud_plus.gif');
+      width: 13px;
+      height: 13px;
+      float: left;
+      margin: 1px 3px 0 0;
+    }
+    &.ouvert {
+      &> .bouton-deplie {
+        background-image: url('../prive/images/noeud_moins.gif');
+      }
+      &> ul, &> div.ajax {
+        display: block;
+      }
+    }
+  }
+  a {
+    display: block;
+    width: 100%;
+    &:hover {
+      background-color: white;
+    }
+  }
+  .pagination {
+    font-size: 12px;
+    a, .on {
+      display: inline;
+      color: $bleu;
+      float: none;
+      margin: 0;
+    }
+  }
+}
+
+.breves h2 {
+  color: #9a2b98;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border-bottom: 1px solid #9a2b98;
+  font-style: italic;
+  font-size: 1.2em;
+  margin-bottom: 8px; }
+
+.breves h3 {
+  color: #9a2b98;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0; }
+
+.breves p {
+  color: #000;
+  font-size: 0.9em;
+  margin: 0 4px 0 0;
+  padding: 0; }
+
+.breves img {
+  float: left;
+  margin-right: 12px;
+  padding: 0; }
+
+.breves li {
+  margin: 0 0 12px 0;
+  border: 1px solid white; }
+
+.projo li {
+  margin: 0 0px 12px 0;
+  padding: 0; }
+
+.projo h4 {
+  font-size: 0.8em;
+  margin: 1px 0 1px 0;
+  padding: 1px 0 1px 0; }
+
+.asso li {
+  margin: 0 0px 12px 0;
+  padding: 0; }
+
+.asso h3 {
+  margin: 1px 0 1px 0;
+  padding: 1px 0 1px 0;
+  font-style: italic;
+  color: $bleu;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.asso p {
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: normal; }
+
+.asso a {
+  color: $bleu;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal; }
+
+/*colonne principale*/
+.col_princip {
+  float: left;
+  width: 500px;
+  min-height: 1em;
+  /* pour éviter qu'une hauteur de 0 ne casse la mise en page */
+  text-align: justify;
+  word-wrap: break-word;
+  margin-left: 20px;
+  margin-right: 30px; }
+
+.col_princip ul {
+  list-style: none;
+  &.spip {
+    list-style: disc;
+    margin-left: 8px;
+  }
+}
+
+.col_princip ul {
+    padding-left: 10px;
+}
+
+.col_princip h2 {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+#rubrique {
+  h2 {
+    margin-left: 10px;
+    margin-top: 15px;
+  }
+  .li-pagination {
+    border-bottom: none;
+  }
+}
+
+.suite {
+  text-align: right;
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-image: url(images/fleche.jpg);
+  background-position: right;
+  background-repeat: no-repeat; }
+
+.suite a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  padding: 20px 50px 8px 0;
+  font-size: 0.9em; }
+
+.col_princip .chapeau {
+  @extend .boite-grise;
+  padding: 10px;
+  margin-top: 20px;
+  p, h3 { margin: 0; }
+}
+
+.col_princip h3 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+  color: #000;
+  font-style: italic;
+  font-weight: normal; }
+
+.col_princip h3 a {
+  color: #000; }
+
+.col_princip p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85em;
+  color: #000; }
+
+/*pagination*/
+.pagination {
+  text-align: right;
+  font-style: italic;
+  font-size: 0.8em;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  a, span, strong {
+    float: left;
+  }
+}
+
+.pagination a, .pagination .on {
+  text-decoration: none;
+  color: #000;
+  margin: 1px 5px;
+}
+
+/* portfolio */
+#documents_portfolio li {
+  float: left;
+  margin-left: 5px;
+}
+
+/* pétitions */
+#signatures {
+  font-size: 0.85em;
+  #formulaire_recherche_signatures {
+    margin-top: 50px;
+    label {
+      display: inline;
+      margin-right: 10px;
+    }
+  }
+}
+
+/* forums */
+.forum {
+  font-size: 0.85em;
+}
+
+/*colonne gauche*/
+.col_right {
+  float: left;
+  width: 230px;
+  margin-top: 30px; }
+
+* + html .col_right {
+  margin-top: 0px; }
+
+.col_right ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.col_right li {
+  margin-bottom: 14px;
+  padding: 0; }
+
+/* navigation verticale*/
+.nav_vert ul {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 14px; }
+
+.nav_vert li {
+  margin: 0;
+  padding: 0; }
+
+.nav_vert a {
+  font-size: 1.1em;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  display: block;
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  padding: 10px 8px 10px 20px !important;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  margin-bottom: 3px;
+  behavior: url(script/PIE.htc); }
+
+.nav_vert a:hover {
+  text-decoration: underline; }
+
+.festival a {
+  background-color: #e8262c; }
+
+.trans a {
+  background-color: #ffcc4d; }
+
+.inter a {
+  background-color: #6b389c; }
+
+.proches a {
+  background-color: #00c1a8; }
+
+.pro a {
+  background-color: #ff989f; }
+
+.tag a {
+  text-decoration: none;
+  color: #989898;
+  white-space: nowrap; }
+
+/*colonne de stats*/
+.stats h2 {
+  color: #9a2b98;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  border-bottom: 1px solid #9a2b98;
+  font-style: italic;
+  font-size: 1.2em;
+  margin-bottom: 8px; }
+
+.stats h3 {
+  color: #000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0;
+  font-style: italic; }
+
+.stats p {
+  color: #000;
+  font-size: 0.9em;
+  margin: 0 4px 0 0;
+  padding: 0;
+  line-height: 1.1em; }
+
+.stats li {
+  margin: 0px 0px 3px 0;
+  padding: 0px 0px 14px 0;
+  background-image: url(images/trait.jpg);
+  background-position: bottom;
+  background-repeat: no-repeat; }
+
+/* footer*/
+.footer {
+  float: left;
+  width: 100%;
+  background-color: #d8edec;
+  background-image: url(images/fond-footer.jpg);
+  background-position: top;
+  background-repeat: repeat-x;
+  text-align: center; }
+
+.sous_footer {
+  text-align: left;
+  width: 980px;
+  margin: 40px auto 0px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 0.85em; }
+
+.sous_footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.sous_footer li {
+  float: left;
+  font-style: italic;
+  font-weight: bold;
+  width: 140px; }
+
+.sous_footer ul li {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.sous_footer ul li ul {
+  margin-top: 30px; }
+
+.sous_footer li li {
+  float: none;
+  margin: 0;
+  font-style: normal;
+  font-weight: normal; }
+
+.sous_footer ul li ul a {
+  color: #000;
+  text-decoration: none; }
+
+.surmentions {
+  width: 100%;
+  float: left;
+  padding-bottom: 20px; }
+
+.surmentions a {
+  color: #000;
+  text-decoration: none; }
+
+.mentions {
+  width: 90%;
+  float: left;
+  margin-top: 40px;
+  font-size: 0.9em; }
+
+.rss {
+  width: 10%;
+  float: left;
+  font-size: 0.9em;
+  margin-top: 40px; }
+
+.rss a {
+  display: block;
+  width: 62px;
+  background-image: url(images/rss.gif);
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 20px; }
+
+/* Calendrier */
+#calendar {
+  @extend .boite-grise;
+  padding-top: 20px;
+  padding-bottom: 20px;    
+}
+
+#calendar table {
+  width: 185px;
+  margin: 0 auto; }
+
+#calendar caption {
+  width: 200px; }
+
+#calendar caption a {
+  color: #000;
+  font-weight: bold;
+  font-family: helvetica, arial, serif;
+  font-size: 14px; }
+
+#calendar table td, #calendar table th {
+  text-align: center;
+  font-size: 12px; }
+
+#calendar table td.today {
+  background: #92319e;
+  color: #FFF; }
+
+#calendar table td.today a {
+  color: #FFF; }
+
+#calendar table td.occupe {
+  background: #CFC8C5; }
+
+#calendar table td.occupe a {
+  color: #000; }
+
+/* plan */
+#plan .col_princip li { border: none; }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin>
+	<!--  
+
+	// player plugin.xml
+
+	// $LastChangedRevision: 43993 $
+	// $LastChangedBy: root $
+	// $LastChangedDate: 2011-01-30 02:00:02 +0100 (Sun, 30 Jan 2011) $
+	
+	 -->
+	<nom> <!-- Nom du plugin -->
+	Lecteur Multim&eacute;dia en Flash (MP3,flv)
+	</nom>
+	<icon>images/logo-32.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+	<a href="http://www.spip-contrib.net/BoOz,502">BoOz</a>,C&#233;dric, erational, CP.
+	</auteur>
+	<version>
+	0.76
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	- <code><docXX|player></code> affiche un lecteur flash audio ou video. (plusieurs lecteurs au choix)<br />
+	- Le plugin ajoute un lecteur aux liens <a href="http://mon_site/mon_son.mp3" rel="enclosure">mon son</a> dans la page<br />
+	- Le plugin ajoute un rel="enclosure" et un lecteur aux liens absolus vers un fichier mp3 <code> [mon son->http://mon_site/mon_son.mp3].</code> dans un texte SPIP<br />
+	- Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3 <br />
+	- Avec <code>[(#MODELE{playliste_video}{id_article=XX})]</code> vous pouvez afficher une playliste video.
+_ <a href="?exec=player_admin">configurer le plugin</a> || 
+	<a href="http://spip-zone.info/spip.php?article18">documentation</a>
+	</description>
+	<options>player_options.php</options>
+	<fonctions>player_fonctions.php</fonctions>
+	<prefix>Player</prefix>
+	
+	<install>base/player_install.php</install>
+	<bouton id='player_config21' parent='bando_squelette'>
+		<icone>images/player-16.png</icone>
+		<titre>player:player_nom</titre>
+		<url>player_admin</url>
+	</bouton>
+	
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
+	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
+	-->
+	<pipeline>
+		<nom>post_propre</nom>
+		<inclure>player_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<!-- les css du plugin dans l'espace privé -->
+		<nom>header_prive</nom>
+		<inclure>inc/player_pipeline_header_prive.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_onglets</nom>
+		<inclure>inc/player_pipeline_ajouter_onglets.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>player_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>inc/player_pipeline_affiche_milieu.php</inclure>
+	</pipeline>
+	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+
+	<necessite id="SPIP" version="[1.9.2;]" />
+	<categorie>multimedia</categorie>
+</plugin>

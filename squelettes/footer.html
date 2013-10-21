@@ -1,0 +1,40 @@
+
+<div class="footer"><!-- footer-->
+	<div class="sous_footer"><!-- plan du site-->
+		<ul>
+			[(#REM) On affiche le menu principal en fonction de mot clée afficher topnav ]
+			[(#REM) D'abord les rubriques ]
+			<B_menuPrinc>
+			<BOUCLE_menuPrinc(RUBRIQUES){titre_mot=afficher topnav}{lang}{doublons}{par num titre}>
+				<li>
+					<a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a>
+					<B_sousRubrique>
+						<ul>
+						<BOUCLE_sousRubrique(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}>
+							<li><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a></li>
+						</BOUCLE_sousRubrique>
+						</ul>
+					</B_sousRubrique>
+				</li>
+			</BOUCLE_menuPrinc>
+			</B_menuPrinc>
+			<//B_menuPrinc>
+			
+			[(#REM) Ensuite les articles ]
+			
+			<B_menuPrincA>
+			<BOUCLE_menuPrincA(ARTICLES){titre_mot=afficher topnav}{lang}{doublons}{par num titre}>
+				<li><a href="#URL_RUBRIQUE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a></li>
+			</BOUCLE_menuPrincA>
+			</B_menuPrincA>
+			<//B_menuPrincA>
+			[(#REM) Fin afficher topnav ]
+		</ul>
+		<div class="surmentions"> 
+		 	<div class="mentions">
+				Genres Pluriels - <multi>[fr]rue marché au Charbon[nl]Kolenmarkt</multi>, 42 - 1000 <multi>[fr]Bruxelles[nl]Brussel</multi> - Tel +32 (0)487 63 23 43 - <a href="mailto:contact@genrespluriels.be">contact@genrespluriels.be</a> | Réalisation: <a href="http://www.vertige.org/" title="Vertige">Vertige</a>.
+			</div>
+			<div class="rss"><a href="[(#URL_PAGE{backend}|parametre_url{'lang',#LANG})]">RSS 2.0</a></div>
+		</div>
+	</div><!-- fin plan du site-->
+</div><!-- fin footer-->

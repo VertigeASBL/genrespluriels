@@ -1,0 +1,66 @@
+<plugin>
+	<nom>Step</nom>
+	<shortdesc>
+		<multi>
+			[fr]Syst&#232;me de t&#233;l&#233;chargement de plugins
+			[en]Plugins download system
+		</multi>
+	</shortdesc>
+	<auteur>
+	Matthieu Marcillaud
+_ &#169; 2008 2010
+	</auteur>
+	<licence>GPL</licence>
+	<lien></lien>
+	<version>0.14.3</version>
+	<version_base>0.5</version_base>
+	<install>base/step_install.php</install>
+
+	<icon>images/step-128.png</icon>
+
+	<etat>dev</etat>
+    <description>
+    	<multi>
+    		[fr]Ce plugin permet de de g&#233;rer les plugins de SPIP ainsi que leur
+			d&#233;pendances et t&#233;l&#233;chargements
+			[en]This plugin allows you to manage SPIP plugins, their 
+			dependencies and downloads
+		</multi>
+	</description>
+	<prefix>step</prefix>
+
+    <options>step_options.php</options>
+    <fonctions>step_fonctions.php</fonctions>
+
+	<bouton id='step' parent='configuration'>
+		<icone>images/step-paquet-24.png</icone>
+		<titre>STEP</titre>
+	</bouton>
+	<bouton id='step2' parent='bando_configuration'>
+		<icone>images/step-paquet-16.png</icone>
+		<titre>STEP</titre>
+		<url>step</url>
+	</bouton>
+
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/step.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/step.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>step_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>step_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;]" />
+
+	<categorie>maintenance</categorie>
+
+</plugin>

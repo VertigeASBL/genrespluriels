@@ -1,0 +1,62 @@
+[(#REM) on commence par calculer la hierarchie courante. ]
+[(#SET{type_page, #ENV|trouver_type_page})]
+
+#SET{hierarchie, #ARRAY}
+#SET{rubriques_a_exclure, #ARRAY{0, 113, 1, 114, 2, 115}}
+
+<BOUCLE_si_article(CONDITION){si #GET{type_page}|=={article}}>
+  <BOUCLE_article_courant(ARTICLES){id_article}{par date}{inverse}>
+    <BOUCLE_hierarchie_article(HIERARCHIE){id_article}>
+      [(#GET{rubriques_a_exclure}|find{#ID_RUBRIQUE}|non)
+        #SET_PUSH{hierarchie, #ID_RUBRIQUE}
+      ]
+    </BOUCLE_hierarchie_article>
+  </BOUCLE_article_courant>
+</BOUCLE_si_article>
+
+<BOUCLE_si_rubrique(CONDITION){si #GET{type_page}|=={rubrique}}>
+  <BOUCLE_rubrique_courant(RUBRIQUES){id_rubrique}>
+    <BOUCLE_hierarchie_rubrique(HIERARCHIE){id_rubrique}>
+      [(#GET{rubriques_a_exclure}|find{#ID_RUBRIQUE}|non)
+        #SET_PUSH{hierarchie, #ID_RUBRIQUE}
+      ]
+    </BOUCLE_hierarchie_rubrique>
+    #SET_PUSH{hierarchie, #ID_RUBRIQUE}
+  </BOUCLE_rubrique_courant>
+</BOUCLE_si_rubrique>
+
+[(#SET{rubrique_mere, #GET{hierarchie}|table_valeur{0}})]
+<BOUCLE_rubrique_mere(RUBRIQUES){id_rubrique=#GET{rubrique_mere}}>
+<h2>#TITRE</h2>
+<B_rubriques>
+<ul>    
+<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre, titre}>
+  <li[(#GET{hierarchie}|find{#ID_RUBRIQUE}|oui) class="ouvert current"]>
+      <div class="bouton-deplie">&nbsp;</div>
+    <a href="#URL_RUBRIQUE">#TITRE</a>
+    <div class="ajax">
+      <BOUCLE_sous_rubriques(BOUCLE_rubriques) />
+        <INCLURE{fond=inc-menu-articles}
+           {env}{ajax}
+           {id_rubrique_menu=#ID_RUBRIQUE}>
+    </div>
+  </li>
+</BOUCLE_rubriques>
+</ul>
+</B_rubriques>
+
+<script type="text/javascript">
+(function ($) { $(function () {
+
+    $('.bouton-deplie').click(function () {
+        $(this)
+            .parent()
+            .find('> ul, > div.ajax')
+            .first()
+            .slideToggle();
+    });
+
+});})(jQuery);
+</script>
+
+</BOUCLE_rubrique_mere>

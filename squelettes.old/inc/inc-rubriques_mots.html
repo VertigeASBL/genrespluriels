@@ -1,0 +1,25 @@
+#CACHE{24*7*3600}
+[(#REM)Sert à calculer les rubriques et sous rubriques dun catégories tagué avec un mot clé. 
+
+Example d'utilisation
+
+#SET{rub_forums,#INCLUDE{fond=inc/inc-rubriques_mots}{titre_mot=afficher_forum}}
+
+[(#ID_RUBRIQUE|in_array{[(#GET{rub_forums}|unserialize)]}|oui)<INCLURE{fond=inc/groupe_forum}{env}/>]
+
+]
+
+[(#REM) Limite à la seule rubrique]
+
+[(#ENV{sous_rubriques}|=={non}|?{#SET{limit,0},#SET{limit,10000}})]
+
+#SET{id_rubrique,#ARRAY}
+
+<BOUCLE_rub(RUBRIQUES){titre_mot}>
+	#SET{id_rubrique,#GET{id_rubrique}|array_merge{#ARRAY{#ID_RUBRIQUE,#ID_RUBRIQUE}}}
+	<BOUCLE_rub_enfant(RUBRIQUES){id_parent}{0,#GET{limit}}>
+		#SET{id_rubrique,#GET{id_rubrique}|array_merge{#ARRAY{#ID_RUBRIQUE,#ID_RUBRIQUE}}}
+		<BOUCLE_rub_enfant_re(BOUCLE_rub_enfant)></BOUCLE_rub_enfant_re>
+	</BOUCLE_rub_enfant>
+</BOUCLE_rub>
+[(#GET{id_rubrique}|serialize)]

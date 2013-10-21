@@ -1,0 +1,41 @@
+#CACHE{24*3600}
+<h2 class="invisible"><:sous_rubriques:></h2>
+<BOUCLE_art(ARTICLES){id_rubrique}{0,1}>
+
+[(#ENV{id_mot}|non)<ul>]
+<BOUCLE_categories(MOTS) {type=Categorie_rubriques} {id_mot ?}>
+	<B_articles>
+		[(#ENV{id_mot}|non)<li class="centrerubli">]
+		<h3 ><a href="[(#URL_RUBRIQUE|parametre_url{id_mot,#ID_MOT})]">[(#TITRE|supprimer_numero)]</a></h3>			
+			<ul>
+			<BOUCLE_articles(ARTICLES) {id_mot} {id_rubrique} {par date}{inverse}>
+				<li><h4><a href="[(#URL_ARTICLE|parametre_url{id_mot,#ENV{id_mot}})]" title="<:spip:info_mise_en_ligne:> [(#DATE|affdate)][(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[, <:dernier_ajout:> (#DATE_MODIF|affdate)] ,''})]">[(#TITRE|supprimer_numero)]</a></h4></li>
+			</BOUCLE_articles>
+			</ul>
+		[(#ENV{id_mot}|non)</li>]
+					
+	</B_articles>										
+</BOUCLE_categories>
+[(#ENV{id_mot}|non)</ul>]
+</BOUCLE_art>
+<B_rub>
+	<BOUCLE_rub(RUBRIQUES){id_parent}{!par titre}{0,1}>
+		<h2>#TITRE</h2>
+		[(#ENV{id_mot}|non)<ul>]
+		<BOUCLE_categories_default(MOTS) {type=Categorie_rubriques} {id_mot ?}>#SET{id_mot,#ID_MOT}
+			<B_articles_default>
+				[(#ENV{id_mot}|non)<li class="centrerubli">]
+				[(#ENV{id_mot}|non)<h3 ><a href="[(#URL_RUBRIQUE|parametre_url{id_mot,#ID_MOT})]">[(#TITRE|supprimer_numero)]</a></h3>]			
+					<ul>
+					<BOUCLE_articles_default(ARTICLES) {id_mot} {id_rubrique} {par date}{inverse}>
+						<li><h4><a href="[(#URL_ARTICLE|parametre_url{id_mot,#GET{id_mot}})]" title="<:spip:info_mise_en_ligne:> [(#DATE|affdate)][(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[, <:dernier_ajout:> (#DATE_MODIF|affdate)] ,''})]">[(#TITRE|supprimer_numero)]</a></h4></li>
+					</BOUCLE_articles_default>
+					</ul>
+				[(#ENV{id_mot}|non)</li>]				
+			</B_articles_default>										
+		</BOUCLE_categories_default>
+		[(#ENV{id_mot}|non)</ul>]
+	</BOUCLE_rub>
+</B_rub>
+
+<//B_art>

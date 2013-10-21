@@ -1,0 +1,78 @@
+#CACHE{1}
+<!-- squelette egt v0.4 -->
+<!-- auteurs: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc/inc-header}>
+</head>
+
+<body>
+<div id="page">
+
+[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	 <INCLURE{fond=inc/inc-entete}>        
+
+[(#REM) <!-- =========================== ZONE CHEMIN DE NAVIGATION ============================= --> ]
+	<div id="navigation">
+		<a href="#URL_SITE_SPIP"><:accueil_site:></a> <img src="#CHEMIN{images/puce.png}" alt=">"/> 
+		<:spiplistes:abonnements_aux_courriers:>
+	</div><!-- fin de navigation -->    
+
+[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=inc/inc-gauche}>
+
+[(#REM) <!-- =================================== ZONE CORPS  ====================================== --> ]
+    <div id="centre-article">
+		<a name="contenu"></a>
+		<h2 class="invisible">abonnement</h2> 
+		<h1 class="titre-texte"><:spiplistes:abonnements_aux_courriers:></h1>
+	
+[<!--(#REM)
+
+	####################################
+	SPIP-Listes : bloc formulaire abonnement
+	####################################
+
+-->]
+<div id='spiplistes-formabo' class='formulaire_spip cadre'>
+[<!--(#REM)
+
+	Si (d) absent dans l'url, propose l'abonnement			
+
+-->][(#ENV{d}|?{'',' '})
+		#FORMULAIRE_ABONNEMENT
+][<!--(#REM)
+
+	Si (d) present dans l'url, propose la modification de l'abonnement			
+
+-->][(#ENV{d}|?{' ',''})
+		[(#SPIP_VERSION|>={2}|?{#FORMULAIRE_MODIF_ABONNEMENT2,#FORMULAIRE_ABONNEMENT})]
+		]
+		</div> <!-- fin du div spiplistes-formabo -->
+		
+	<BOUCLE_courrier_envoye_2(COURRIERS) {0,1}>
+		  <div id="courrierenvoye">
+		  <h3><a href="[(#URL_PAGE{archive_courriers}|parametre_url{'lang',#LANG})]" title="<:egt:voir_messages_envoyes:>"><:egt:courriers_archives:></a></h3>
+		  </div>
+	</BOUCLE_courrier_envoye_2>
+[<!--(#REM)
+
+	####################################
+	SPIP-Listes : fin de bloc formulaire abonnement
+	####################################
+
+-->]
+		
+    </div><!-- fin du div centre-article -->
+      
+[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}{self=#SELF}>     
+     
+</div><!-- fin du div page -->
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+</body>
+</html>

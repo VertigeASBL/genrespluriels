@@ -1,0 +1,16 @@
+<!DOCTYPE webprojectsession>
+<webprojectsession>
+  <session usePreviewPrefix="0" previewPrefix="" >
+    <itemcursorpositions>
+      <item line="5" column="17" url="prive/editer/barre_traductions_article.html" />
+      <item line="45" column="18" url="inc/article_afficher_contenu.php" />
+      <item line="3" column="22" url="plugin.xml" />
+    </itemcursorpositions>
+    <treestatus>
+      <openfolder url="inc" />
+      <openfolder url="prive" />
+      <openfolder url="prive/editer" />
+      <openfolder url="prive/liste" />
+    </treestatus>
+  </session>
+</webprojectsession>

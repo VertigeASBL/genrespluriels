@@ -1,0 +1,20 @@
+.super, .footer {
+    width: 90%;
+    margin: auto;
+}
+
+.head, .barre_news, .col_left, .col_right, #en_travaux {
+    display: none;
+}
+
+.col_princip > ul {
+    padding: 0 40px;
+}
+
+.col_princip > ul > li {
+    list-style: none;
+}
+
+.footer ul, .spip-admin-float {
+    display: none !important;
+}

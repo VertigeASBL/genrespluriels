@@ -1,0 +1,37 @@
+<BOUCLE_principale(BREVES) {id_breve}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+    <INCLURE{fond=inc-head}{env}>
+</head>
+<body>
+<div class="super">
+    
+    <INCLURE{fond=inc-entete}{env}>
+
+    <div class="content"><!-- contenu -->
+        <INCLURE{fond=inc-col-gauche}{env}>
+
+        <div class="col_princip"><!-- colonne article-->
+            <ul>
+                <li>
+                    <h3>[(#TITRE|supprimer_numero)]</h3>
+                    
+					[<div id="texte" class="#EDIT{texte} texte">(#TEXTE|justifier||image_reduire{410,0})</div>]<br />
+					[<div id="ps">(#PS)</div>]
+					[<div id="notes">(#NOTES)</div>]
+
+					[<p class="#EDIT{hyperlien} hyperlien"><strong><:voir_en_ligne:> :</strong> <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+                </li>
+            </ul>
+        </div><!-- fin colonne article-->
+    
+        <INCLURE{fond=inc-col-droite}{env}>
+
+    </div><!-- fin contenu-->
+</div><!-- Fin du centrage -->
+
+<INCLURE{fond=footer}{env}>
+</body>
+</html>
+</BOUCLE_principale>

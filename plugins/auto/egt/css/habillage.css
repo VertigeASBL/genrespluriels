@@ -1,0 +1,468 @@
+/* --------------------------------------------------------- */
+/*             Feuille de style du squelette egt            */
+/* --------------------------------------------------------- */
+
+/*  ----------------------------------------------------------
+/* 	Typographie generale (styles transversaux)
+/*  ------------------------------------------------------ */
+
+html { font-size: 100%; }  /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS */
+body { font-size: 0.8em; font-family: Verdana, Arial, Helvetica, sans-serif; color: #333; }
+
+/* Divers */
+abbr, acronym { border-bottom: 1px dotted; cursor: help; }
+small { font-size: 0.90em; color: #666; }
+
+/* Listes SPIP */
+ul.spip {} /*Cf.: spip_style.css*/
+ol.spip {} /*Cf.: spip_style.css*/
+li.spip {} /*Cf.: spip_style.css*/
+dl {}
+dt {}
+dd {}
+
+/* Citations, code et poesie */
+blockquote.spip {} /*Cf.: spip_style.css*/
+blockquote.spip_poesie {} /*Cf.: spip_style.css*/
+.spip_code {} /*Cf.: spip_style.css*/
+.spip_cadre {} /*Cf.: spip_style.css*/
+
+/* Tableaux */
+table.spip {} /*Cf.: spip_style.css*/
+
+/* Logos, documents et images */
+.spip_logos {} /*Cf.: spip_style.css*/
+.spip_documents {} /*Cf.: spip_style.css*/
+.spip_documents_center {} /*Cf.: spip_style.css*/
+.spip_documents_left {} /*Cf.: spip_style.css*/
+.spip_documents_right {} /*Cf.: spip_style.css*/
+.spip_doc_titre {} /*Cf.: spip_style.css*/
+.spip_doc_descriptif {} /*Cf.: spip_style.css*/
+
+/* Couleurs des liens */
+a { color: #006699; text-decoration: none; padding-bottom: 1px; }
+a:hover,a:active { border-bottom-width: 2px; border-bottom-style: dotted; border-color: #B9D570; color: #006699; text-decoration: none; }
+/* * Couleurs des liens de Spip */
+a.spip_note { }
+/* liens vers notes de bas de page */
+a.spip_in {color: #006699; }
+/* liens internes */
+a.spip_out {	color: #006699; }
+/* liens sortants */
+a.spip_url { color: #006699; }
+/* liens url sortants */
+a.spip_glossaire { color: #000; text-decoration: underline; }
+a[hreflang]:after { content: "\0000a0[" attr(hreflang) "]"; color: #999; background: transparent; }
+/* liens vers encyclopedie */
+.on { color: #000; }
+
+
+/*  -------------------------------------------------------
+/*  Disposition a l'ecran des blocs principaux
+/*  --------------------------------------------------- */
+html { padding: 0; }
+body { margin-top: 0; padding: 0; text-align: center; width: 100%;  background: #FFF; }
+
+#page { width: 1020px; min-width: 600px; margin: 0 auto; background: #FFF; text-align: center; padding: 10px; padding-left: 40px; padding-right: 40px; }
+
+/*  bordures div du cadre principal */
+/* #page { border-style: solid; border-width: 10px 7px 10px 10px; border-left-color: #efefef; border-top-color: #ececec; border-right-color: #f2f2f2; border-bottom-color:  #f3f3f3; -moz-border-radius: 30px 25px 30px 30px; background-repeat:repeat-y; } */
+
+/*  bordures ombrag�es du cadre principal */
+#ombretop { width: 1030px; background-image: url(../images/haut.png);  background-repeat:no-repeat; background-position:0px 0px;  padding: 27px 0px 7px 0px; margin: -10px 0px 0px -40px; /*background: #FFF;*/ }
+#page {	background-image:  url(../images/milieu.png); background-repeat:repeat-y; }
+#ombrepied { width: 1030px; background-image: url(../images/bas.png);  background-repeat:no-repeat;  padding: 25px 0px 7px 0px; margin: 0px 0px -20px -40px; /*background: #FFF;*/ }
+
+/*  conteneur */
+#conteneur { padding: 0; margin: 20px 0px; text-align: left; width: 950px; }
+#contenu { padding-top: 0.30em; }
+
+/*****************************/
+/*  accesibilite barre superieure */
+/****************************/
+#ac-key { float: left; width: 100%; text-align: left; margin: 0px 0px 10px 0px; padding: 0; }
+#ac-key li { display: inline; font-size: 0.8em; font-weight: bold; }
+#ac-key a { color: #AFA4A4;   /* #fff */ }
+#ac-key a:hover { background: #CCCCFF;  /*#CCFFFF; #AFA4A4; */ }
+
+/*******************/
+/* bandeau superieur */
+/*******************/
+#entete { background: #FFF; margin: 0; padding: 10px 7px 0px 0px; color: #CFCFCF; height: 93px }
+#entete h1 {}
+#entete h4 {font-size: 0.8em; text-align: center; color: #CFCFCF; }
+#entete img { margin: 0px 10px 0px 0px; }
+#entete-logo img { float: left; margin:0 auto; position:relative;}
+#entete-logo-mot img { position: absolute; margin: -110px 10px 0px 520px; }
+#entete-texte { margin: 0px 0px 10px 220px; padding: 0; color: #4E5383; text-align: left; font-size: 2.5em; }
+#entete-descriptif {	margin: 0px 0px 0px 220px; padding: 0;  color: #4E5383; font-size: 1.5em; font-weight: bold; }
+#entete .langues { text-align: right; font-size: 1.2em; font-weight: normal; margin: 0 0 10px 0; }
+
+/* menu horizontal dans bandeau superieur */
+#topnav {clear:left; margin: 0; padding: 0; font-size:1.1em; background: #DDE7EC; height: 27px; }
+#topnav ul {float:left; list-style:none; margin:0; padding:0; display: inline; }
+#topnav ul li {float:left; list-style:none; font-weight:bold;}
+#topnav ul li a {color:#fff; padding:4px 10px; display:block;}
+#topnav ul li a:hover {color:#2a6167; background:#efefef;}
+#topnav ul li.on a {color:#fff; background:#414040;}
+#topnav img {vertical-align: top;}
+
+/*********************************/
+/* bande trouver sous bandeau */
+/********************************/
+#trouver { clear: left; height: 27px; padding:0 20px; padding-right: 10px; background: #efefef;}
+
+/* formulaire de recherche toujours pr�sent*/
+#trouver #formulaire_recherche { float:right; clear:left; margin:0; display:inline; position: absolute; margin: 0px 10px 0px 500px; text-align: left; padding:0 0 4px;} /*Cf.: spip_formulaires.css*/
+#trouver #formulaire_recherche input.text { width: 10em; text-align: left; border:1px solid #999; padding-left: 25px; } /*Cf.: spip_formulaires.css*/
+#trouver #formulaire_recherche input.text {background: #FFF3CF url("../images/rechercher.gif") no-repeat left center; }
+#trouver #formulaire_recherche:focus { background-image: url("../images/rechercher.gif}"); }
+#trouver #formulaire_recherche label {display:inline; color: #666; font-weight:normal;}
+
+/* positionnement et habillage des ic�nes du plugin boutonstexte se ce dernier est actif*/
+#trouver .textsizeup, #trouver  .textsizedown, #trouver  .textonly { border: 1px solid #666; vertical-align: top; }
+#trouver .textsizeup:hover, #trouver  .textsizedown:hover, #trouver .textonly:hover {background: #666;}
+
+/*********************************/
+/* chemin de navigation dans l'entete */
+/*******************************/
+#navigation { float: left; clear:left; text-align: left; width: 100%; font-weight: 600; border-color: #006699; border-style: solid; border-width: 0px 0px 10px 0px; margin: 2px 0px 7px 0px;padding-top: 0px; padding-bottom: 0px; }
+#navigation ul { margin-left: -8px; }
+#navigation li { display: inline; list-style-type: none; font-weight: 600; }
+#navigation img { vertical-align: 0px; margin-right: 3px; margin-left: 3px; }
+
+/*******************/
+/*  colonne de gauche */
+/******************/
+#gauche { float: left; width: 220px; }
+
+/*   menu de gauche */
+#gauche #menu {background: #EFEFEF; margin: 0px 0px 10px 0px; padding: 5px; -moz-border-radius: 10px; }
+#gauche #menu .open {display: block; padding-top: 0px; padding-bottom: 10px; font-weight: bold; }
+#gauche #menu .closed { display: none; }
+#gauche #menu ul { list-style-type: none; padding-top: 5px; padding-bottom: 5px; margin-left: 0px; padding-left: 10px; margin-top: 0; margin-bottom: 0; }
+#gauche #menu li { color: #B9D570; list-style-type: none; padding-top: 0px; padding-bottom: 0px; padding-left: 0px; margin-left: 0px; }
+#gauche #menu li .actif {font-weight: bold; color: #C59E67; }
+#gauche #menu .artracine { margin-bottom: 3px; padding-left: 3px; border-left-width: 2px; border-left-style: solid; border-color: #006699; font-weight: 100; color: #C59E67; }
+
+/* noisette formulaire d'inscription sur le site */
+#gauche #inscription { background: #EFEFEF; margin: 0px 0px 10px 0px; padding: 0px; -moz-border-radius: 10px; text-align: left; }
+#gauche #inscription .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic; color: #C70000; text-align: left; } 
+#gauche #inscription .titrebloc { margin: 0; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#gauche #inscription .titrebloc { background: #C0C0C0; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; } 
+#gauche #inscription .formulaire_inscription {font-size: 1em; margin: 5px; }
+#gauche #inscription form { padding: 0; text-align: left; font-size: 0.8em; }
+
+/* noisette de la newslettre */
+#gauche #newslettre { background: #EFEFEF; margin: 0px 0px 10px 0px; padding: 0px; -moz-border-radius: 10px; border: 0; text-align: left; }
+#gauche #newslettre {font-size: 0.8em; }
+#gauche #newslettre .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic; color: #C70000; text-align: left; } 
+#gauche #newslettre .titrebloc { margin: 0; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#gauche #newslettre .titrebloc { background: #C0C0C0; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; } 
+#gauche #newslettre #mail_inscription_ { width: 10em; clear: both;}
+
+/* noisette de statistiques */
+#gauche #statistics {display: block;}
+#gauche #statistics .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic; color: #C70000; text-align: left; } 
+#gauche #statistics .titrebloc { margin: 0; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#gauche #statistics .titrebloc { background: #C0C0C0; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; } 
+#gauche #statistics .stats {font-size: 11px; border-right: 1px solid #808080; border-bottom: 1px solid #808080; border-left: 1px solid #808080; text-align: center; padding: 3px 0px 3px 0px; color: #808080; margin: 0; }
+
+/*   liste des sites et articles syndiqu�s de la colonne de gauche */
+#gauche_syndic { display: block; background: #EFEFEF; margin: 0px; -moz-border-radius: 10px; font-size: 0.9em; }
+#gauche_syndic .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic; color: #C70000; text-align: left; } 
+#gauche_syndic .titrebloc { margin: 0 0 5px 0; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#gauche_syndic .titrebloc { background: #C0C0C0; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; } 
+#gauche_syndic img {	margin-bottom: 10px; }
+#gauche_syndic  ul { list-style-type: none; margin: 0 0 0 10px; padding: 0; }
+#gauche_syndic li { color: #B9D570; list-style-type: square; margin: 0px 5px 10px 10px; padding: 0; }
+#gauche_syndic li p { font-size: 0.95em; margin: 5px 0px -7px 0px; padding: 0; color: #000000; }
+#gauche_syndic li img { float: right; }
+
+
+/*  ------------------------------------------
+/*  Colonne centrale du sommaire
+/*  ------------------------------------------*/
+#centre { float: left; margin: 0; padding-left: 30px; width: 500px; text-align: justify; overflow: visible !important; }
+/* Articles � la une en colonne centrale */
+#centre h3.centre-top { margin: 0px; font-family: Tuffy_bold; color: #89b5cb; font-size: 2.3em; text-align: left; }
+#centre .centre-chapeau{ margin-top: 13px; font-size: 1em; font-weight: bold; border-width: 1px; border-style: solid; border-color: black;  background-color: #EFEFEF; -moz-border-radius: 10px; padding: 10px; }
+/*  porfolio-sommaire */
+/* Portfolio styles egt*/
+#centre .porfolio-sommaire { width: 400px; padding-left: 0px; margin: 5px auto 5px auto; }
+#centre .porfolio { float: left; padding: 5px 0px 0px 0px; margin: 10px 10px 0px 10px; text-align: center; width: 156px; color: black; font-weight: 800; font-size: 0.9em; -moz-border-radius: 10px; border: black 1px solid; }
+#centre .porfolio a {padding-bottom: 1px; }
+#centre .porfolio-descriptif { text-align: center; margin-top: 0px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px; font-size: 0.8em; color: black; font-weight: 300; }
+#centre .porfolio-type { text-align: center; margin-top: 7px; margin-bottom: 6px; font-size: 0.77em; font-weight: 100; color: #CFCFCF; }
+
+/* habillage des 5 derniers articles publi�s */
+#centre #actu { margin-top: 10px; }
+#centre #actu .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic ; color: #C70000; text-align: left; } 
+#centre #actu .titrebloc { margin: 0; margin-bottom: 10px; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#centre #actu h3 { font-size: 1.1em; margin: -5px 0px 0px 0px; padding: 0px 0px 5px 0px; text-align: left; }
+#centre #actu li { font-size: 1.2em; font-weight: bold; padding: 0px 0px 0px 0px; }
+#centre #actu ul { margin: 0px 20px 0px 40px; list-style-image: url(../images/fleche.png); padding-bottom: 5px; padding-left: 10px; padding-top: 5px; }
+#centre #actu li img { margin-top: O; }
+#centre #actu .datepubsom {font-size: 0.8em; font-weight: 100; color: #BFBFBF; margin-top: -21px; }
+#centre #actu .centre_intro { margin-top: -15px; margin-bottom: 15px; font-size: 0.9em; font-weight: 500; font-style: italic; }
+#centre #actu .pagination { margin: 0px 0px 10px 50px; font-size: 0.9em; }
+
+#centre .pagination { margin: 0px 0px 10px 50px; font-size: 0.9em; }
+
+#centre hr { float: left; color: #EFEFEF; margin: 0px 0px 0px 0px; width: 99%; height: 3px; }
+
+/*  ------------------------------------------
+/*  colonne centrale d'une rubrique
+/*  ------------------------------------------*/
+#centre-rubrique { float: left; margin: 0 0 20px 30px; width: 500px; text-align: left; overflow: visible !important; }
+#centre-rubrique #texterub {	margin: 10px 10px 10px 0px; padding: 10px 10px 10px 10px; border: black 1px solid; -moz-border-radius: 10px; background-color: #ADD8E6; }
+#centre-rubrique #logorub img{ margin-top:-25px; }
+#centre-rubrique .engras { font-weight: bold; }
+#centre-rubrique .centrerubli { list-style-image: none; }
+#centre-rubrique .titrerub { font-size: 1.3em; font-weight: 800; }
+#centre-rubrique h2 { width: 75%; border-color: #006699; border-style: solid; border-width: 0px 0px 1px 0px; padding: 0; margin: -3px 0px 10px 0px; }
+#centre-rubrique h4 { font-size: 0.9em; font-weight: 200; }
+#centre-rubrique h4.tit-art-rub {margin: 15px 0; }
+#centre-rubrique ul { margin: 5px 0px 15px 40px; list-style-image: url(../images/fleche.png); padding-top: 5px; padding-bottom: 5px; padding-left: 10px; }
+/* habillage des evenements */
+#centre-rubrique li.even { margin: 0; margin-top: 10px; }
+#centre-rubrique .titreven { font-size: 1.2em; font-weight: 200; font-weight: bold; margin: 10px 0; }
+#centre-rubrique .dateven {font-size: 0.8em; font-weight: 100; color: #FF8000; margin-top: -21px;}
+#centre-rubrique .descriptioneven {margin-top: -15px; margin-bottom: 15px; font-size: 0.9em; font-style: italic; }
+#centre-rubrique .locationeven {}
+#centre-rubrique .adresseven {}
+
+/* Album d'images repris de squelette-dist */
+#centre-rubrique #documents_portfolio { clear: both; margin: 2em auto; text-align: center; }
+#centre-rubrique #documents_portfolio .spip_logos { margin: 6px 3px 0 3px; border: 4px solid #DDD; }
+#centre-rubrique #documents_portfolio a.on .spip_logos { border-color: #F57900; }
+#centre-rubrique #documents_portfolio a:focus .spip_logos,
+#centre-rubrique #documents_portfolio a:hover .spip_logos,
+#centre-rubrique #documents_portfolio a:active .spip_logos { border-color: #8B6F92; }
+/* Portfolio styles egt*/
+#centre-rubrique #documents_joints { padding-left: 0px; margin: 5px auto 5px auto; }
+#centre-rubrique .porfolio { float: left; padding: 5px 0px 0px 0px; margin: 10px 10px 0px 10px; text-align: center; width: 156px; color: black; font-weight: 800; font-size: 0.9em; -moz-border-radius: 10px; border: black 1px solid; }
+#centre-rubrique .porfolio a {padding-bottom: 1px; }
+#centre-rubrique .porfolio-descriptif { text-align: center; margin-top: 0px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px; font-size: 0.8em; color: black; font-weight: 300; }
+#centre-rubrique .porfolio-type { text-align: center; margin-top: 7px; margin-bottom: 6px; font-size: 0.77em; font-weight: 100; color: #CFCFCF; }
+
+/*  ------------------------------------------
+/*  colonne centrale d'un article
+/*  ------------------------------------------*/
+#centre-article { float: left; text-align: justify; width: 670px; margin: 0 0 20px 30px; overflow: visible !important; }
+#centre-article h2 { margin-top: -3px; }
+#centre-article #sur-titre { font-size: 1.1em; font-weight: bold; font-stretch: wider; margin-left: 3px; margin-top: -5px; padding-bottom: 2px; }
+#centre-article .titre-texte { font-size: 1.4em; font-weight: bolder; border-width: 0px 0px 0px 3px; border-style: solid; border-color: #000; background: url(../images/degrade_titre.png) repeat-y; 	padding-left: 5px; padding-bottom: 5px; margin-right: -7px; margin-top: 0px; }
+#centre-article #publie { margin-top: 10px; font-size: 0.85em; margin-left: 3px; }
+#centre-article #sous-titre { font-size: 1.1em; margin-top: 0px; margin-left: 3px; margin-bottom: 5px; color: gray; }
+#centre-article #outils_article { float: right; text-align: right; }
+#centre-article #chapeau { margin-top: 13px; font-size: 1em; font-weight: bold; border-width: 1px; border-style: solid; border-color: black; background-color: #EFEFEF; -moz-border-radius: 10px; padding: 10px; }
+#centre-article #texte { font-size: 1.0em; }
+#centre-article #ps { font-size: 0.9em; border-width: 1px; border-style: solid; border-color: #FFF; background-color: #DFDFDF; -moz-border-radius: 10px; padding: 5px 5px 0px 0px; }
+#centre-article #notes { }
+
+/* Album d'images repris de squelette-dist */
+#centre-article #documents_portfolio { clear: both; margin: 2em auto; text-align: center; }
+#centre-article #documents_portfolio .spip_logos { margin: 6px 3px 0 3px; border: 4px solid #DDD; }
+#centre-article #documents_portfolio a.on .spip_logos { border-color: #F57900; }
+#centre-article #documents_portfolio a:focus .spip_logos,
+#centre-article #documents_portfolio a:hover .spip_logos,
+#centre-article #documents_portfolio a:active .spip_logos { border-color: #8B6F92; }
+/* Portfolio styles egt*/
+#centre-article #documents_joints { padding-left: 0px; margin: 5px auto 5px auto; }
+#centre-article .porfolio { float: left; padding: 5px 0px 0px 0px; margin: 10px 10px 0px 10px; text-align: center; width: 156px; color: black; font-weight: 800; font-size: 0.9em; -moz-border-radius: 10px; border: black 1px solid; }
+#centre-article .porfolio a {padding-bottom: 1px; }
+#centre-article .porfolio-descriptif { text-align: center; margin-top: 0px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px; font-size: 0.8em; color: black; font-weight: 300; }
+#centre-article .porfolio-type { text-align: center; margin-top: 7px; margin-bottom: 6px; font-size: 0.77em; font-weight: 100; color: #CFCFCF; }
+
+/*  ------------------------------------------
+/*  Archive des courriers envoy�s
+/*  ------------------------------------------*/
+.page_archive_courrier #centre-rubrique li a.actif {font-weight: bold; color: #C59E67; }
+
+/*  ------------------------------------------
+/*  colonne centrale du plan
+/*  ------------------------------------------*/
+#centre-plan { float: left; text-align: left; width: 600px; margin: 0 0 20px 30px; overflow: visible !important; }
+.contre-encart ul h3 { font-size: 1.3em; list-style-type: none; }
+#centre-plan ul { margin: 5px 0px 15px 40px; list-style-image: url(../images/fleche.png); }
+.datepubsom { font-size: 0.8em; font-weight: 100; color: #BFBFBF; margin-top: -21px; }
+
+/*  ------------------------------------------
+/*  colonne centrale de la page evenements
+/*  ------------------------------------------*/
+.page_evenements #centre-rubrique { float: left; margin: 0 0 20px 30px; width: 443px; text-align: left; }
+
+/*******************/
+/*  colonne de droite */
+/******************/
+#droite { float: right; width: 170px; font-size: 0.9em; margin:0px; padding:0px; }
+#droite li { color: #B9D570; list-style-type: square; margin-left: 10px; }
+
+/*  Article d'aide dans la colonne de droite */
+#droite #aide { }
+#droite #aide .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic ; 	color: #C70000; text-align: center; margin: 0px auto 5px auto;} 
+#droite  #aide .titrebloc hr { border: 0px; height: 2px; color: #C70000; background-color: #C70000; margin-left: 0px; margin-right: 0px; }
+
+/* Habillage du splickrbox   */
+#droite #splickrbox { text-align: center;  padding: 0;  width: 170px; margin: 0 0 10px 0px; overflow: visible; }
+#droite #splickrbox .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic; color: #C70000; text-align: left; } 
+#droite #splickrbox.titrebloc { margin: 0; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#droite #splickrbox .titrebloc { background: #C0C0C0; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; } 
+#droite #splickrbox  .splickrbox { color: #006699; text-decoration: none; border-color: #006699; border-width: 0 1px 1px; border-style: none solid solid; }
+#droite #splickrbox img {}
+
+/*   Habillage du mini calendrier   */
+#droite #calendar { margin: 0; width: 170px; }
+#droite #calendar { -moz-border-radius: 1em; text-align: center; border: 1px dotted #ccc; padding: 5px 0; width: 170px; }
+#droite #calendar table { width: 100%; margin: 0 auto; padding: 0; }
+#droite #calendar caption { font-size:0.8em; padding: 5px ; font-weight: bold; }
+/* intitul�s des colonnes avec les abbr�viations des jours*/
+#droite #calendar th { -moz-border-radius: 1em; background: #ADC7D6; font-weight: normal; color: #666; }
+#droite #calendar th.weekend {}
+#droite #calendar th.weekday {}
+#droite #calendar th abbr { border: none; cursor: help; }
+/* jours du mois*/
+#droite #calendar td {-moz-border-radius: 0.7em; margin: 0; padding: 0; border: none; text-align: center; background: #ddd; line-height: 1.6em; }
+#droite #calendar td.horsperiode { background: #ececec; color: #ccc; }
+#droite #calendar td.occupe { background: #FFD98F; }
+#droite #calendar td.today { background: #FF8000; color: #FFF}
+/* comportement et habillage des liens sur les dates occup�es */
+#droite #calendar td a { display: block; text-decoration: none; color: #27287F; cursor: pointer; }
+#droite #calendar td span { color: #aaa; }
+#droite #calendar td a:hover { border:0px }
+#droite #calendar tr { font-size: 0.9em; }
+
+/*  Habillage de l'agenda des �v�nements en-dessous du mini-calendrier   */
+#agenda dt{ background-color: #FFD98F; -moz-border-radius: 10px; padding: 2px 0px 2px 10px; margin: 0px 0px 0px 0px; }
+#agenda dd{ font-size: 0.9em; padding: 2px 0px 2px 20px; margin: 0px 0px 0px 0px; }
+#agenda dd.engras {font-weight: bold;} 
+
+/*   Habillage des breves   */
+#droite #breves { display: block; background: #EFEFEF; margin: 0px; margin-bottom: 10px; -moz-border-radius: 10px; font-size: 0.9em; }
+#droite #breves .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic ; color: #C70000; text-align: left; } 
+#droite #breves .titrebloc { margin: 0; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#droite #breves .titrebloc { background: #C0C0C0; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; } 
+#droite #breves  ul { list-style-type: none; margin-bottom: 0; margin-left: 0; margin-top: 0; padding-bottom: 5px; padding-left: 10px; padding-top: 5px; }
+#droite #breves li { padding: 0px 0px 0px 0px; color:#B9D570; list-style-type: square; margin-left: 10px; }
+#droite #breves  li img { margin-top: O; }
+#droite #breves .datebreve { font-size: 0.8em; color: #BFB5B3; margin-bottom: 4px; }
+
+/*   Habillage du texte � retenir   */
+#droite #aretenir-texte { padding:0px 10px 10px 10px; }
+
+/*   Habillage du texte � retenir   */
+#droite #syndic {margin-top: 0px; font-size: 0.8em; }
+#droite #syndic .titrebloc { font-size: 16px; font-weight: bold; font-family: Arial black,Arial,Verdana,Helvetica,sans-serif; font-style: italic ; color: #C70000; text-align: left; } 
+#droite #syndic .titrebloc { margin: 0; padding-left: 5px; border-bottom: 2px solid #C70000; } 
+#droite #syndic .titrebloc { background: #C0C0C0; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; } 
+#droite #syndic p { text-align: center; }
+#droite #syndic li { margin-left:23px; }
+#droite #syndic p{ margin:0 0; padding:5px 0px 5px 0px; }
+#droite #syndic .syndicsite {font-weight: 800; text-align: center; }
+#droite #syndic .sitesyndicdesc {	margin: 0px 0px 5px 7px; }
+
+
+/*******************/
+/*     Pied de page       */
+/******************/
+#pied { clear: both; width: 100%; border-color: black;	border-style: solid; border-width: 1px 0px 0px 0px; text-align: right; margin-bottom: -15px; }
+#pied-spip {	font-size: 0.8em; float: left; padding: 5px 0px 0px 10px; filter: alpha(opacity=70); -moz-opacity: 0.3;opacity: 0.3; }
+#pied-ecrire { font-size: 0.9em; margin: 5px 5px 10px 0px; }
+#pied img { vertical-align: middle;}
+
+/*******************/
+/*           Divers           */
+/******************/
+/* Espaceur de blocs */
+.nettoyeur { clear: both; height: 0; margin: 0; padding: 0; border: 0; line-height: 1px; font-size: 1px; }
+
+/* Non visible a l'ecran */
+.invisible { display: none; }
+
+.engras { font-weight: bold; } 
+
+/***************************/
+/*  habillage des formulaires   */
+/**************************/
+
+fieldset { background: #C2DDEF; }
+
+/*  formulaire d'inscription
+/*  ------------------------------------------*/
+.formulaire_inscription {font-size: 1.2em; width: 100%; margin: 30px 0px;}
+#inscription { margin-left: -7px; margin-bottom: 8px; }
+#inscription input { }
+#inscription label {margin-bottom: 5px; }
+#inscription { font-size: 0.95em; padding-left: 7px; }
+#inscription form { padding-top: 10px; padding-bottom: 10px; text-align: center; }
+.formulaire_inscription legend { font-size: 1.2em; font-weight: bold; }
+#inscription  .spip_bouton { margin-top: 5px; }
+
+#spiplistes-formabo { width: 100%;}
+.formulaire-spiplistes-abo ul { margin: 5px 0px 15px 5px; list-style-image: none; padding-top: 0; }
+
+#courrierenvoye { text-align: right; margin-top: -20px; margin-right: 5px; margin-bottom: 20px; padding-top: 20px; }
+
+/*  formulaire des forums
+/*  ------------------------------------------*/
+.formulaire_forum { border-width: 1px; border-style: solid; border-color: black; background-color: #EFF8FF; -moz-border-radius: 10px; padding: 5px 5px 5px 5px; margin: 0px 0px 0px 10px; }
+.formulaire_forum legend { display: none; }
+.previsu { background: #fff; -moz-border-radius: 10px; margin-bottom: 10px; }
+.extrait { margin-top: 5px; background: #EFEFEF; }
+.forml#auteur { margin-left: 50px; width: 260px; margin-top: 5px; }
+.forml#auteur:hover { background: #FFF; }
+.forml#email_auteur { margin-left: 137px; width: 260px; }
+.forml#url_site { margin-top: -20px; margin-left: 137px; width: 260px; }
+.forum-repondre { float: left; font-size: 0.9em; border-width: 1px; border-style: solid; border-color: black; background-color: #DFDFDF; -moz-border-radius: 10px; padding: 5px 5px 5px 5px; margin: 0px 0px 0px 10px; }
+.forum ul { font-size: 0.85em; border-width: 0px; border-style: solid; border-color: black; -moz-border-radius: 10px; padding: 10px 5px 5px 5px; margin: 0px 0px 0px 0px; }
+.forum-fil li { margin-left: 25px; list-style-image: none; }
+.forum-total { }
+.forum-fil { color: black; margin-left: 50px; list-style-image: none; }
+.forum { }
+.forum-chapo { }
+.forum-titre { font-weight: bold; padding: 0px 5px 5px 5px; margin: 27px 0px 0px -4px; }
+.forum-item { border-width: 1px 1px 0px 0px; border-style: solid; border-color: #AFAFAF; background-color: #EFEFEF; 	-moz-border-radius: 10px; padding: 5px 5px 5px 5px; margin: 0px 0px 0px 0px; }
+.forum-repondre-message { border-width: 1px 1px 0px 0px; border-style: none; border-color: black; background-color: #EFEFEF; 	-moz-border-radius: 10px; padding: 5px 5px 5px 5px; margin: 10px 0px 0px 0px; }
+.forum-texte { border-width: 1px 1px 0px 0px; border-style: solid; border-color: #9F9F9F; background-color: #DFDFDF; 	-moz-border-radius: 10px; padding: 5px 5px 5px 5px; margin: 10px 0px 0px 0px; }
+
+
+/*  formulaire des petitions
+/*  ------------------------------------------*/
+.formulaire_signature {	border-width: 1px; border-style: solid; border-color: black; background-color: #EFF8FF; -moz-border-radius: 10px; padding: 5px 5px 5px 5px; margin: 0px 0px 0px 10px; }
+.formulaire_signature legend { font-weight: bold; }
+#signatures caption { margin-top: 15px; font-size: 1.4em; font-weight: bold; }
+#signatures table { padding-left: 15px; }
+.formulaire_signature #signature_url_site { margin-left: 11px; }
+.formulaire_signature #adresse_email { margin-left: 11px; }
+#signatures { font-size: 0.77em; }
+#signatures h2 { padding: 0.5em; text-align: center; font-size: 1.2em; font-weight: bold; }
+#signatures table { width: 100%; margin: 1em 0; }
+#signatures thead { display: none; }
+/* On n'affiche pas les titres du tableau */
+#signatures td.signature-date { background: #E4F0F0; padding: 0.5em; white-space: nowrap; }
+#signatures td.signature-nom { background: #ECF4F4; padding: 0.2em; text-align: center; font-weight: bold; }
+#signatures td.signature-message { background: #F4F8F8; padding: 0.4em; font-size: 0.96em; }
+#signatures .formulaire_recherche { margin: 1em 0; text-align: right; } /*Cf.: spip_formulaires.css*/
+#signatures .formulaire_recherche input.text { width: 10em; text-align: left; padding-left: 25px; } /*Cf.: spip_formulaires.css*/
+#signatures .formulaire_recherche input.text { background: #FFF url("../images/rechercher.gif") no-repeat left center; } /*Cf.: spip_formulaires.css*/
+
+/*  formulaire contact auteur
+/*  ------------------------------------------*/
+.formulaire_ecrire_auteur { border-width: 1px; border-style: solid; border-color: black; background-color: #EFF8FF; -moz-border-radius: 10px; padding: 5px 5px 5px 5px; margin: 0px 0px 0px 10px; }
+
+/*  formulaire proposer sites
+/*  ------------------------------------------*/
+.formulaire_site { border-width: 1px; border-style: solid; border-color: black; background-color: #EFF8FF; -moz-border-radius: 10px;
+padding: 5px 5px 5px 5px; margin: 0px 0px 20px 10px; }
+.formulaire_site legend { font-weight: bold; }
+.formulaire_site #nom_site { margin-left: 63px; width: 52%; }
+.formulaire_site #url_site { margin-left: 0px; width: 51%; }
+
+/*  formulaire abomailman
+/*  ------------------------------------------*/
+#formulaire_abomailman .reponse_formulaire { color: red; font-size: 110%; }
+#formulaire_abomailman legend { font-size: 1.2em; font-weight: bold; }
+#formulaire_abomailman .abomailman_nom {}
+#formulaire_abomailman .obligatoire .abomailman_email {}
+#formulaire_abomailman .abomailman_listes {}

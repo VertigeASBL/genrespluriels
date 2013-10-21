@@ -1,0 +1,23 @@
+<!-- squelette egt v0.6 -->
+<!-- auteur: damazone, sBa - licence GPL -->
+<!-- http://www.spip-contrib.net/EGT-squelette-plugin-pour-SPIP-2 -->
+#CACHE{86400}
+<BOUCLE_courrier_principal(COURRIERS){id_courrier}>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<INCLURE{fond=inc-head}{titreheader=#TITRE}{lang}>
+</head>
+<body class="page_courrier">
+
+		<h1 class="titre-texte">#TITRE</h1>
+		<div id="texte" class="texte">#TEXTE</div>
+
+[(#FORMULAIRE_ADMIN{'spip-admin-float'})]
+
+
+</body>
+
+</BOUCLE_courrier_principal>
+</html>

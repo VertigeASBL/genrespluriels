@@ -1,0 +1,21 @@
+		<!-- affichage des 2 prochains événements -->		
+		<div id="agenda">
+			<div style="text-align:center;">
+				<a href="[(#URL_PAGE{agenda}|parametre_url{'lang',#LANG})]" title="<:agenda:afficher_calendrier:>"><:egt:plus_action:></a><br />
+				<a href="[(#URL_PAGE{agenda-rss}|parametre_url{'lang',#LANG})]" title="<:egt:tous_nos_rdv:>">Agenda-rss</a>
+			</div>
+
+			  <B_agenda>
+				  <h3><:agenda:></h3>
+				  <dl>
+				<BOUCLE_agenda(EVENEMENTS){age<0}{par date}{statut=publie}{id_evenement?}{0,2}>
+				  <dt>#TITRE</dt>
+				  [<dd>(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE})</dd>]
+				  [<dd class='engras'>(#LIEU|PtoBr)</dd>]
+				  [<dd>(#DESCRIPTIF|PtoBr)</dd>] 
+				</BOUCLE_agenda></dl>          
+				[<dd>(#FORMULAIRE_PARTICIPER{id_evenement}|PtoBr)</dd>]
+			  </B_agenda>
+
+        </div><!-- fin du div agenda -->
+        <!-- fin evenements agenda -->   

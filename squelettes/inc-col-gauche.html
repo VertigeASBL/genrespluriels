@@ -1,0 +1,54 @@
+<div class="col_left"><!-- colonne gauche-->
+	<ul class="breves">
+
+    [<li id="menu-gauche">
+      (#INCLURE{fond=inc-menu-gauche}{env})
+    </li>]
+
+		<li><h2><:genres:breves:></h2><!-- liste des breves-->
+			<ul>
+				<BOUCLE_breves(BREVES) {par date} {inverse} {0,3} {lang}>
+          <li>
+					[(#LOGO_BREVE|image_reduire{70,52})]
+					<h3><a href="#URL_BREVE">[(#DATE|affdate_mois_annee|ucfirst)]</a></h3>
+					<p>[(#TITRE|supprimer_numero)]</p>
+          </li>
+				</BOUCLE_breves>
+			</ul>
+		</li><!-- fin liste des breves-->
+
+    <B_events>
+		<li>
+			<h2><:genres:prochains_evenements:></h2>
+	
+			<ul class="events">
+        <BOUCLE_events(EVENEMENTS){age_debut<0}{lang}{par date_debut}{0,3}>
+				  <li>
+					  <h3><a href="#URL_ARTICLE" title="#TITRE">
+                [(#DATE_DEBUT|affdate_jourcourt)]
+            </a></h3>
+					  <h4>#TITRE</h4>
+				  </li>
+        </BOUCLE_events>
+			</ul>
+		</li>
+    </B_events>
+
+		<li>
+			<h2><:genres:autres_assos:></h2><!-- liste autres assos-->
+	
+			<ul class="asso">
+				<B_autreAssoc>
+				<BOUCLE_autreAssoc(SITES){titre_mot=afficher site syndique et articles}{0,3}>
+					<li>
+						<a href="#URL_SITE">
+              <h3>#NOM_SITE</h3>
+            </a>
+						#DESCRIPTIF
+					</li>
+				</BOUCLE_autreAssoc>
+				</B_autreAssoc>
+			</ul>
+		 </li><!-- fin liste autres assos-->
+	</ul>
+</div><!-- fin colonne gauche-->

@@ -1,0 +1,8 @@
+		<div id="inscription">
+			<BOUCLE_logo_participer(MOTS){titre=afficher logo participer}>
+					<div class="titrebloc">
+					[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}sinon{<:spip:participer:>})]
+					</div>
+				</BOUCLE_logo_participer>
+			#FORMULAIRE_INSCRIPTION
+		</div> <!-- fin div inscription -->

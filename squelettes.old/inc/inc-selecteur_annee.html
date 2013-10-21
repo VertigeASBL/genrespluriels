@@ -1,0 +1,11 @@
+<B_annee>
+<h3>
+<BOUCLE_annee(ARTICLES){id_rubrique}{0,1}{!par date}>
+	[(#ENV{annee}|=={[(#DATE|annee)]}|?{[(#DATE|annee)],<a href="[(#URL_RUBRIQUE|parametre_url{annee,[(#DATE|annee)]})]">[(#DATE|annee)]</a>})]	
+	<BOUCLE_anterieur(ARTICLES){annee_relatif>0}{id_rubrique}{0,1}{!par date}>
+		[ - (#ENV{annee}|=={[(#DATE|annee)]}|?{[(#DATE|annee)],<a href="[(#URL_RUBRIQUE|parametre_url{annee,[(#DATE|annee)]})]">[(#DATE|annee)]</a>})]
+			<BOUCLE_rec(BOUCLE_anterieur)></BOUCLE_rec>
+	</BOUCLE_anterieur>
+</BOUCLE_annee>
+</h3>
+</B_annee>

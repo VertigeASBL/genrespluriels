@@ -1,0 +1,75 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+    <INCLURE{fond=inc-head}{env}>
+</head>
+<body>
+<div class="super">
+    <INCLURE{fond=inc-entete}{env}>
+
+    <div class="content"><!-- contenu -->
+
+        [(#REM) Fil d'Ariane ]
+        <B_ariane>
+        <div id="hierarchie">
+          <a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+          <BOUCLE_ariane(HIERARCHIE){id_article}{id_rubrique !IN 114,115?}>
+            [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|non)
+              &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a>
+            ][(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)
+              [ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+            ]          
+          </BOUCLE_ariane>
+        </B_ariane>
+
+        <INCLURE{fond=inc-col-gauche}{env}>
+
+        <div id="rubrique" class="col_princip"><!-- colonne article-->
+          [(#REM) La rubrique en elle même ]
+          <h2 class="#EDIT{titre} titrerub">[(#TITRE|supprimer_numero)]</h2>
+				  [<div id="logorub">(#LOGO_RUBRIQUE|right||image_reduire{130,0})</div>]
+				  [<div id="texterub" class="#EDIT{texte} texterub">(#TEXTE)</div>]
+          <B_sites>
+            <ul>
+              <BOUCLE_sites(SITES){id_rubrique}>
+                <li>
+                  <a href="#URL_SITE">#NOM_SITE</a>
+                  #DESCRIPTIF
+                </li>
+              </BOUCLE_sites>
+            </ul>
+          </B_sites>
+
+            <B_articleRubrique>
+            #ANCRE_PAGINATION
+            <ul>
+	            <BOUCLE_articleRubrique(ARTICLES){id_rubrique=#ID_RUBRIQUE}{pagination}{par date}{inverse}>
+	            <li>
+                <h3><a href="#URL_ARTICLE" title="[(#TITRE|supprimer_numero)]">[(#TITRE|supprimer_numero)]</a></h3>
+                <p>[(#TEXTE|couper{300})]</p>
+                <div class="suite"><a href="#URL_ARTICLE"><:genres:lire_suite:></a></div>
+              </li>	
+	            </BOUCLE_articleRubrique>
+	            [<li class="li-pagination"><p class="pagination">(#PAGINATION{page_simple})</p></li>]
+            </ul>
+            </B_articleRubrique>
+ 
+          [(#REM) Gestion du portfolio et des documents
+	  Le critere {env} permet de passer d'autres arguments de la page
+	  par exemple l'id_document choisi pour un affichage complet
+          ]
+          [(#INCLURE{fond=inclure/documents-rubrique}{env})]
+  
+        </div><!-- fin colonne article-->
+    
+        <INCLURE{fond=inc-col-droite}{env}>
+
+    </div><!-- fin contenu-->
+</div><!-- Fin du centrage -->
+
+<INCLURE{fond=footer}{env}>
+</body>
+</html>
+
+</BOUCLE_principale>

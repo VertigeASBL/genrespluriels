@@ -1,0 +1,45 @@
+#CACHE{24*3600}
+			<div class="engras"><:ecrire:entree_interieur_rubrique:></div>
+
+			<B_articles_racine>
+				<ul>
+					<BOUCLE_articles_racine(ARTICLES){annee ?} {id_rubrique} {par date}{inverse}>
+						<li><h4 class="tit-art-rub"><a href="#URL_ARTICLE" title="<:spip:info_mise_en_ligne:> [(#DATE|affdate)][(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[, <:dernier_ajout:> (#DATE_MODIF|affdate)] ,''})]">[(#TITRE|supprimer_numero)]</a></h4></li>
+							</BOUCLE_articles_racine>
+						</ul>
+					</B_articles_racine>
+					<img src="#CHEMIN{images/calle.png}" alt='calle'/>
+				<//B_articles_racine>
+				<h2 class="invisible"><:sous_rubriques:></h2>
+					
+					<B_rubriques>
+						<ul>
+							
+							<BOUCLE_rubriques(RUBRIQUES) {id_parent}{par titre}>
+								<li class="centrerubli">
+									<h3 ><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></h3>
+									<B_articles>
+										<ul>
+										<BOUCLE_articles(ARTICLES){annee ?} {id_rubrique} {par date}{inverse}>
+										<li><h4><a href="#URL_ARTICLE" title="<:spip:info_mise_en_ligne:> [(#DATE|affdate)][(#DATE_MODIF|affdate|!=={[(#DATE|affdate)]}|?{[, <:dernier_ajout:> (#DATE_MODIF|affdate)] ,''})]">[(#TITRE|supprimer_numero)]</a></h4></li>
+										</BOUCLE_articles>
+									</ul>
+								</B_articles>
+								<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+							</li>
+						</BOUCLE_rubriques>
+					</ul>
+				</B_rubriques>
+				
+				<!-- breves -->
+				<B_breves>
+					<div class="engras"><:breves:></div>
+						<ul>
+							<BOUCLE_breves(BREVES) {id_secteur}{annee ?} {par date} {inverse} {0,15}>
+								<li>
+									<a href="#URL_BREVE">#TITRE</a>
+									<div class="datepub">[(#DATE|affdate)]</div>
+								</li>
+							</BOUCLE_breves>
+						</ul>
+					</B_breves>

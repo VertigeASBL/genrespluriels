@@ -1,0 +1,15 @@
+[<p class="formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p><span class="erreur">(#ENV**{erreurs}|table_valeur{email})</span></p>]
+[(#ENV{editable}|oui)
+<form action="#ENV{action}" method="post">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	[<input type="hidden" name="listes&#91;&#93;" value="(#ENV{id_liste})" />]
+	<input type="hidden" name="format_abo" checked="checked" value="html" />
+	<table>
+	<tr>
+		<td class="text"><input type="text" name="email" id="email" value="<:genres:inscrire_par_mail:>" class="text" /></td>
+		<td class="submit"><input type="submit" class="submit" name="ok" value="OK" /></td>
+	</tr>
+	</table>							
+</form>]

@@ -1,0 +1,20 @@
+		<div id="newslettre">
+				<BOUCLE_logo_newslettre(MOTS){titre=afficher logo newslettre}>
+				<div class="titrebloc">
+					[(#LOGO_MOT||inserer_attribut{'title',#TEXTE}sinon{<:spiplistes:lettre_d_information:>})]
+				</div>
+				</BOUCLE_logo_newslettre>
+			<form class="formulaire-spiplistes-abo" action="#SELF#spiplistes_formabo_a" method="post" id="nl-spip-listes">
+				<fieldset>
+						<legend><:spiplistes:lettre_d_information:></legend>
+						<div class="coord">
+							<label for="mail_inscription_"><:spip:form_indiquer_email:> :</label>
+							<input type="text" class="forml" id="mail_inscription_" name="mail_inscription_" value="" size="12" />
+						</div>
+				[<p class="message-formulaire">(#ENV*{reponse_formulaire})</p>]
+				<p class="spip_bouton">
+				<input type="submit" name="Valider" value="<:bouton_valider:>" />
+				</p>
+				</fieldset>
+			</form>
+		</div> <!-- fin div newslettre -->

@@ -1,0 +1,18 @@
+<BOUCLE_art(ARTICLES){id_rubrique=#ENV{id_rub}}{type!=egt_squelette}{0,1}>
+<li>
+	<ul id="ul_mot_#ID_RUBRIQUE"  class="[(#ID_RUBRIQUE|=={#ENV{id_rubrique}}|?{open,invisibe})]">
+		
+		<BOUCLE_categories(MOTS) {type=Categorie_rubriques}>
+			<B_articles>
+				<li><a onclick="toggle('#ID_RUBRIQUE', '#CHEMIN{images}')" onkeypress="if (event.keyCode == 13) { toggle('#ID_RUBRIQUE', '#CHEMIN{images}'); }"><img src="#CHEMIN{#EXPOSE{images/opened.png,images/closed.png}}" alt="-" title="<:spip:info_deplier:>" id="img_#ID_MOT#ID_RUBRIQUE"  /></a>
+				<a [ class="(#EXPOSE{actif})"] href="[(#URL_RUBRIQUE{#ID_RUBRIQUE}|parametre_url{id_mot,#ID_MOT})]">[(#TITRE|supprimer_numero)]</a>
+				</li>			
+
+				<BOUCLE_articles(ARTICLES) {id_mot} {id_rubrique} {par date}{inverse}>
+				</BOUCLE_articles>
+									
+		</BOUCLE_categories>
+	</ul>
+</li>	
+</BOUCLE_art>
+

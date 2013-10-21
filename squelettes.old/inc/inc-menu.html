@@ -1,0 +1,80 @@
+
+#SET{senstri,0}
+
+#SET{affichage_inverser,#INCLUDE{fond=inc/inc-rubriques_mots}{titre_mot=menu_affichage_inverse}{sous_rubriques=non}}
+
+<div id="menu">
+	<!-- ancre accessibilite -->
+	<a name="<:rubriques:>"></a>
+	<h2 class="invisible"><:rubriques:></h2> 
+	<!-- rubriques racine sauf celles associ�es au mot cl� "exclure du menu"-->
+	<BOUCLE_secteurs(RUBRIQUES) {racine} {lang} {par titre} {!titre_mot=exclure du menu}>
+	[(#ID_RUBRIQUE|in_array{[(#GET{affichage_inverser}|unserialize)]}|?{#SET{senstri,1},#SET{senstri,0}})]
+			<B_rubriques>			
+				<ul class="open">
+				<BOUCLE_rubriques(RUBRIQUES){par titre}{inverse #GET{senstri}}{id_parent}{!titre_mot=exclure du menu}>
+					<li class="invisible">&nbsp;#GET{senstri}</li>	
+					<li id="rub#ID_RUBRIQUE">
+						<a onclick="toggle('#ID_RUBRIQUE', '#CHEMIN{images}')" onkeypress="if (event.keyCode == 13) { toggle('#ID_RUBRIQUE', '#CHEMIN{images}'); }"><img src="#CHEMIN{#EXPOSE{images/opened.png,images/closed.png}}" alt="-" title="<:spip:info_deplier:>" id="img_#ID_RUBRIQUE"  /></a>
+						&nbsp;<a href="#URL_RUBRIQUE" title="[<:dernier_ajout:> : (#DATE|affdate_court)]" [ class="(#EXPOSE{actif})"]>[(#TITRE|supprimer_numero)]</a>
+						
+						<ul id="ul_#ID_RUBRIQUE" [class="(#EXPOSE{open,closed})"]>
+							 <li class="invisible">&nbsp;#GET{senstri}</li>		
+						<B_subrub_menu_sites_references>
+						<!-- articles des sous-rubriques -->
+
+							<!-- BOUCLE_subrub_menu_sites_references-->
+							<BOUCLE_subrub_menu_sites_references(SITES) {id_rubrique} {par nom_site}{doublons}>
+							<li class="artracine">
+							<a href="#URL_SITE" target="_self" title="[(#DESCRIPTIF|textebrut|entites_html)]">
+										  [(#NOM_SITE)]</a>
+							</li>
+						</BOUCLE_subrub_menu_sites_references>
+						<!-- FIN BOUCLE_subrub_menu_sites_references-->					
+
+
+					</B_subrub_menu_sites_references>
+				
+						<INCLURE{fond=inc/inc-menu_mots}{id_rub=#ID_RUBRIQUE}{env}/>
+						
+						[(#ID_RUBRIQUE|in_array{[(#GET{affichage_inverser}|unserialize)]}|?{#SET{senstri,1},#SET{senstri,0}})]
+						
+							<BOUCLE_rubriques_sr(RUBRIQUES){par titre}{inverse #GET{senstri}}{id_parent}{!titre_mot=exclure du menu}>
+							
+								<li id="rub#ID_RUBRIQUE">
+								<a onclick="toggle('#ID_RUBRIQUE', '#CHEMIN{images}')" onkeypress="if (event.keyCode == 14) { toggle('#ID_RUBRIQUE', '#CHEMIN{images}'); }"><img src="#CHEMIN{#EXPOSE{images/opened.png,images/closed.png}}" alt="-" title="<:spip:info_deplier:>" id="img_#ID_RUBRIQUE"  /></a>
+								&nbsp;<a href="#URL_RUBRIQUE" title="[<:dernier_ajout:> : (#DATE|affdate_court)]" [ class="(#EXPOSE{actif})"]>[(#TITRE|supprimer_numero)]</a>
+								<!-- articles des sous-rubriques -->
+								<ul id="ul_#ID_RUBRIQUE" [class="(#EXPOSE{open,closed})"]> 
+								<li class="invisible">&nbsp;</li>						
+								<B_subrub_menu_sites_references_sr>
+
+									<!-- BOUCLE_subrub_menu_sites_references-->
+									<BOUCLE_subrub_menu_sites_references_sr(SITES) {id_rubrique} {par nom_site}{doublons}>
+									<li class="artracine">
+										<a href="#URL_SITE" target="_self" title="[(#DESCRIPTIF|textebrut|entites_html)]">[(#NOM_SITE)]</a>
+									</li>
+									</BOUCLE_subrub_menu_sites_references_sr>
+									<!-- FIN BOUCLE_subrub_menu_sites_references-->		
+
+								</B_subrub_menu_sites_references_sr>					
+											
+								[(#REM) Menu basé sur mots clés]			
+											
+								<INCLURE{fond=inc/inc-menu_mots}{id_rub=#ID_RUBRIQUE}{env}/>
+								[(#ID_RUBRIQUE|in_array{[(#GET{affichage_inverser}|unserialize)]}|?{#SET{senstri,1},#SET{senstri,0}})]	
+													<!-- sous-sous-rubriques -->
+								<BOUCLE_sous_rubriques(BOUCLE_rubriques_sr)></BOUCLE_sous_rubriques>
+
+								</ul>
+								</li>
+							</BOUCLE_rubriques_sr>
+	
+						</ul>							
+					</li>
+					<!-- sous-sous-rubriques -->
+				</BOUCLE_rubriques>
+				</ul>
+			</B_rubriques>
+	</BOUCLE_secteurs>			
+</div><!-- fin div menu-->
