@@ -74,6 +74,7 @@
 [(#REM) Un peu de javascript ]
 [<script type="text/javascript" src="(#CHEMIN{js/script.js})"></script>]
 
+[(#REM) Statistiques du site ]
 <!-- Piwik --> 
 <script type="text/javascript"> 
 var _paq = _paq || []; 
@@ -86,3 +87,14 @@ var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[
 s.parentNode.insertBefore(g,s); })();
 </script> 
 <!-- End Piwik Code -->
+<!-- Piwik Image Tracker -->
+<noscript>
+<?php
+if (preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])) {
+//do not fire tracker  
+}
+else {?>
+<img src="http://piwik.genrespluriels.be/piwik.php?&idsite=1&amp;rec=1&urlref&_cvar={&quot;5&quot;:[&quot;Non Bot&quot;,&quot;No Javascript&quot;]}" style="border:0" alt="" />
+<?php }?>
+</noscript>
+<!-- End Piwik Image Tracker -->
